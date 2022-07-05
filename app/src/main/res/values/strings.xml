@@ -4,5 +4,6 @@
     <string name="search">Search Books</string>
     <string name="favorite">Favorite Books</string>
     <string name="settings">Settings</string>
+    <string name="book_info">Book Info</string>
 
 </resources>

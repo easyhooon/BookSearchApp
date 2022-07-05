@@ -1,9 +1,11 @@
 package com.kenshi.booksearchapp.data.model
 
 
+import android.os.Parcelable
 import androidx.annotation.Keep
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
 @Keep
 @JsonClass(generateAdapter = true)
@@ -25,6 +27,7 @@ data class SearchResponse(
         val totalCount: Int,
     )
 
+    @Parcelize
     @Keep
     @JsonClass(generateAdapter = true)
     data class Book(
@@ -52,5 +55,5 @@ data class SearchResponse(
         val translators: List<String>,
         @field:Json(name = "url")
         val url: String,
-    )
+    ) : Parcelable
 }
