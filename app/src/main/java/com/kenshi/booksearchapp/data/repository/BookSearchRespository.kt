@@ -21,4 +21,9 @@ interface BookSearchRepository {
 
     //fun getFavoriteBooks(): LiveData<List<Book>>
     fun getFavoriteBooks(): Flow<List<Book>>
+
+    // DataStore
+    suspend fun saveSortMode(mode: String)
+
+    suspend fun getSortMode(): Flow<String>
 }
