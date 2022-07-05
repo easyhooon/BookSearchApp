@@ -43,6 +43,6 @@
         tools:layout="@layout/fragment_book">
         <argument
             android:name="book"
-            app:argType="com.kenshi.booksearchapp.data.model.SearchResponse$Book" />
+            app:argType="com.kenshi.booksearchapp.data.model.Book" />
     </fragment>
 </navigation>

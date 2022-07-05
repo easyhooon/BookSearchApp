@@ -10,6 +10,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kenshi.booksearchapp.R
+import com.kenshi.booksearchapp.data.db.BookSearchDatabase
 import com.kenshi.booksearchapp.data.repository.BookSearchRepositoryImpl
 import com.kenshi.booksearchapp.databinding.ActivityMainBinding
 import com.kenshi.booksearchapp.ui.viewmodel.BookSearchViewModel
@@ -35,7 +36,8 @@ class MainActivity : AppCompatActivity() {
         }*/
         setupNavigation()
 
-        val bookSearchRepository = BookSearchRepositoryImpl()
+        val database = BookSearchDatabase.getInstance(this)
+        val bookSearchRepository = BookSearchRepositoryImpl(database)
         val factory = BookSearchViewModelProviderFactory(bookSearchRepository, this)
         bookSearchViewModel = ViewModelProvider(this, factory)[BookSearchViewModel::class.java]
     }

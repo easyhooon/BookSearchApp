@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.kenshi.booksearchapp.data.model.SearchResponse
+import com.kenshi.booksearchapp.data.model.Book
 import com.kenshi.booksearchapp.databinding.ItemBookPreviewBinding
 
-class BookSearchAdapter : ListAdapter<SearchResponse.Book, BookSearchViewHolder>(BookDiffCallback) {
+class BookSearchAdapter : ListAdapter<Book, BookSearchViewHolder>(BookDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookSearchViewHolder {
         return BookSearchViewHolder(
@@ -23,23 +23,23 @@ class BookSearchAdapter : ListAdapter<SearchResponse.Book, BookSearchViewHolder>
         }
     }
 
-    private var onItemClickListener: ((SearchResponse.Book) -> Unit)? = null
-    fun setOnItemClickListener(listener: (SearchResponse.Book) -> Unit) {
+    private var onItemClickListener: ((Book) -> Unit)? = null
+    fun setOnItemClickListener(listener: (Book) -> Unit) {
         onItemClickListener = listener
     }
 
     companion object {
-        private val BookDiffCallback = object : DiffUtil.ItemCallback<SearchResponse.Book>() {
+        private val BookDiffCallback = object : DiffUtil.ItemCallback<Book>() {
             override fun areItemsTheSame(
-                oldItem: SearchResponse.Book,
-                newItem: SearchResponse.Book,
+                oldItem: Book,
+                newItem: Book,
             ): Boolean {
                 return oldItem.isbn == newItem.isbn
             }
 
             override fun areContentsTheSame(
-                oldItem: SearchResponse.Book,
-                newItem: SearchResponse.Book,
+                oldItem: Book,
+                newItem: Book,
             ): Boolean {
                 return oldItem == newItem
             }

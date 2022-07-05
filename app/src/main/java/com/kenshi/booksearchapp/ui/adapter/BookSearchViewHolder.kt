@@ -2,14 +2,14 @@ package com.kenshi.booksearchapp.ui.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.kenshi.booksearchapp.data.model.SearchResponse
+import com.kenshi.booksearchapp.data.model.Book
 import com.kenshi.booksearchapp.databinding.ItemBookPreviewBinding
 
 class BookSearchViewHolder(
     private val binding: ItemBookPreviewBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(book: SearchResponse.Book) {
+    fun bind(book: Book) {
         // 좌우 꺽쇄 날림
         val author = book.authors.toString().removeSurrounding("[", "]")
         val publisher = book.publisher

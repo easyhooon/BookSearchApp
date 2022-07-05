@@ -17,12 +17,13 @@ import com.kenshi.booksearchapp.data.repository.BookSearchRepository
 //        throw IllegalArgumentException("ViewModel class not found")
 //    }
 //}
+@Suppress("UNCHECKED_CAST")
 class BookSearchViewModelProviderFactory(
     private val bookSearchRepository: BookSearchRepository,
     owner: SavedStateRegistryOwner,
     defaultArgs: Bundle? = null,
 ) : AbstractSavedStateViewModelFactory(owner, defaultArgs) {
-    override fun <T : ViewModel?> create(
+    override fun <T : ViewModel> create(
         key: String,
         modelClass: Class<T>,
         handle: SavedStateHandle,
