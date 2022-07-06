@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.kenshi.booksearchapp.common.collectLatestLifecycleFlow
 import com.kenshi.booksearchapp.databinding.FragmentFavoriteBinding
-import com.kenshi.booksearchapp.ui.adapter.BookSearchAdapter
+import com.kenshi.booksearchapp.ui.adapter.BookSearchPagingAdapter
 import com.kenshi.booksearchapp.ui.viewmodel.BookSearchViewModel
 
 
@@ -22,7 +22,9 @@ class FavoriteFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var bookSearchViewModel: BookSearchViewModel
-    private lateinit var bookSearchAdapter: BookSearchAdapter
+
+    //private lateinit var bookSearchAdapter: BookSearchAdapter
+    private lateinit var bookSearchAdapter: BookSearchPagingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,13 +63,20 @@ class FavoriteFragment : Fragment() {
 //        }
 
         //확장함수로 변경
-        collectLatestLifecycleFlow(bookSearchViewModel.favoriteBooks) {
-            bookSearchAdapter.submitList(it)
+//        collectLatestLifecycleFlow(bookSearchViewModel.favoriteBooks) {
+//            bookSearchAdapter.submitList(it)
+//        }
+
+        //pagingData 는 시간에 따라 변하기 때문에 collect 가 아닌 collectLatest 로 구독 처리
+        // 기존의 paging 값을 cancel -> 새 값을 구독하도록
+        collectLatestLifecycleFlow(bookSearchViewModel.favoritePagingBooks) {
+            bookSearchAdapter.submitData(it)
         }
     }
 
     private fun setupRecyclerView() {
-        bookSearchAdapter = BookSearchAdapter()
+        //bookSearchAdapter = BookSearchAdapter()
+        bookSearchAdapter = BookSearchPagingAdapter()
         binding.rvFavoriteBooks.apply {
             setHasFixedSize(true)
             layoutManager =
@@ -98,16 +107,29 @@ class FavoriteFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.bindingAdapterPosition
-                val book = bookSearchAdapter.currentList[position]
-                bookSearchViewModel.deleteBooks(book)
-                //undo 시 recyclerview 의 표시 위치를 유지하고 싶으면
-                //book class 의 primary key 를 isbn 대신 자동 증가하는 정수값을 추가 해서 저장해주면 됨
-                //그러면 item 이 지워졌다가 다시 생성되어도 recyclerview 가 정수 오름차순으로 항목값을 표시해주게 됨
-                Snackbar.make(view, "Book has deleted", Snackbar.LENGTH_SHORT).apply {
-                    setAction("Undo") {
-                        bookSearchViewModel.saveBooks(book)
-                    }
-                }.show()
+//                val book = bookSearchAdapter.currentList[position]
+//                bookSearchViewModel.deleteBooks(book)
+//                //undo 시 recyclerview 의 표시 위치를 유지하고 싶으면
+//                //book class 의 primary key 를 isbn 대신 자동 증가하는 정수값을 추가 해서 저장해주면 됨
+//                //그러면 item 이 지워졌다가 다시 생성되어도 recyclerview 가 정수 오름차순으로 항목값을 표시해주게 됨
+//                Snackbar.make(view, "Book has deleted", Snackbar.LENGTH_SHORT).apply {
+//                    setAction("Undo") {
+//                        bookSearchViewModel.saveBooks(book)
+//                    }
+//                }.show()
+
+                val pagedBook = bookSearchAdapter.peek(position)
+                pagedBook?.let { book ->
+                    bookSearchViewModel.deleteBooks(book)
+                    //undo 시 recyclerview 의 표시 위치를 유지하고 싶으면
+                    //book class 의 primary key 를 isbn 대신 자동 증가하는 정수값을 추가 해서 저장해주면 됨
+                    //그러면 item 이 지워졌다가 다시 생성되어도 recyclerview 가 정수 오름차순으로 항목값을 표시해주게 됨
+                    Snackbar.make(view, "Book has deleted", Snackbar.LENGTH_SHORT).apply {
+                        setAction("Undo") {
+                            bookSearchViewModel.saveBooks(book)
+                        }
+                    }.show()
+                }
             }
         }
         ItemTouchHelper(itemTouchHelperCallback).apply {

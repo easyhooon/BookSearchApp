@@ -11,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.WorkManager
 import com.kenshi.booksearchapp.R
 import com.kenshi.booksearchapp.data.db.BookSearchDatabase
 import com.kenshi.booksearchapp.data.repository.BookSearchRepositoryImpl
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     // datastore 의 singleton 객체
     private val Context.dataStore by preferencesDataStore(DATASTORE_NAME)
+    private val workManager = WorkManager.getInstance(application)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         val database = BookSearchDatabase.getInstance(this)
         val bookSearchRepository = BookSearchRepositoryImpl(database, dataStore)
-        val factory = BookSearchViewModelProviderFactory(bookSearchRepository, this)
+        val factory = BookSearchViewModelProviderFactory(bookSearchRepository, workManager, this)
         bookSearchViewModel = ViewModelProvider(this, factory)[BookSearchViewModel::class.java]
     }
 

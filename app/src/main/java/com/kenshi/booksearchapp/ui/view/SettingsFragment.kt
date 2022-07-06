@@ -1,6 +1,7 @@
 package com.kenshi.booksearchapp.ui.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,7 @@ class SettingsFragment : Fragment() {
 
         saveSettings()
         loadSettings()
+        showWorkStatus()
     }
 
     private fun saveSettings() = with(binding) {
@@ -45,6 +47,15 @@ class SettingsFragment : Fragment() {
             }
             bookSearchViewModel.saveSortMode(value)
         }
+
+        swCacheDelete.setOnCheckedChangeListener { _, isChecked ->
+            bookSearchViewModel.saveCacheDeleteMode(isChecked)
+            if (isChecked) {
+                bookSearchViewModel.setWork()
+            } else {
+                bookSearchViewModel.deleteWork()
+            }
+        }
     }
 
     private fun loadSettings() = with(binding) {
@@ -55,6 +66,25 @@ class SettingsFragment : Fragment() {
                 else -> return@launch
             }
             rgSort.check(buttonId)
+        }
+
+        lifecycleScope.launch {
+            val mode = bookSearchViewModel.getCacheDeleteMode()
+            //cache 버튼의 활성화 여부 반영
+            swCacheDelete.isChecked = mode
+        }
+    }
+
+    private fun showWorkStatus() = with(binding) {
+        bookSearchViewModel.getWorkStatus().observe(viewLifecycleOwner) { workInfo ->
+            Log.d("WorkManager", workInfo.toString())
+            // 초기엔 값이 존재하지 않기 때문에 분기처리
+            if (workInfo.isEmpty()) {
+                tvWorkStatus.text = getString(R.string.no_works)
+            } else {
+                // 현재 work 상태 가져오기
+                tvWorkStatus.text = workInfo[0].state.toString()
+            }
         }
     }
 

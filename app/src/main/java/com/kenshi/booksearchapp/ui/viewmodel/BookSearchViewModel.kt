@@ -1,20 +1,23 @@
 package com.kenshi.booksearchapp.ui.viewmodel
 
 import androidx.lifecycle.*
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.work.*
 import com.kenshi.booksearchapp.data.model.Book
 import com.kenshi.booksearchapp.data.model.SearchResponse
 import com.kenshi.booksearchapp.data.repository.BookSearchRepository
+import com.kenshi.booksearchapp.worker.CacheDeleteWorker
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.concurrent.TimeUnit
 
 //viewModel 그 자체로는 생성시에 초기값을 전달 받을 수 없다.
 class BookSearchViewModel(
     private val bookSearchRepository: BookSearchRepository,
+    private val workManager: WorkManager,
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -63,14 +66,18 @@ class BookSearchViewModel(
 
     companion object {
         private const val SAVE_STATE_KEY = "query"
+
+        //WorkManager 작업의 tag 로 사용
+        private val WORKER_KEY = "cache_worker"
     }
 
+    // DataStore
     // DataStore is safe to call on UI thread too
 //    fun saveSortMode(value: String) = viewModelScope.launch(Dispatchers.IO) {
 //        bookSearchRepository.saveSortMode(value)
 //    }
 
-    fun saveSortMode(value: String) = viewModelScope.launch(Dispatchers.IO) {
+    fun saveSortMode(value: String) = viewModelScope.launch {
         bookSearchRepository.saveSortMode(value)
     }
 
@@ -79,4 +86,61 @@ class BookSearchViewModel(
     suspend fun getSortMode() = withContext(Dispatchers.IO) {
         bookSearchRepository.getSortMode().first()
     }
+
+    fun saveCacheDeleteMode(value: Boolean) = viewModelScope.launch {
+        bookSearchRepository.saveCacheDeleteMode(value)
+    }
+
+    suspend fun getCacheDeleteMode() = withContext(Dispatchers.IO) {
+        bookSearchRepository.getCacheDeleteMode().first()
+    }
+
+    // Paging
+    val favoritePagingBooks: StateFlow<PagingData<Book>> =
+        bookSearchRepository.getFavoritePagingBooks()
+            //코투린이 데이터 스트림을 캐시하고 공유가능하게 만들어줌
+            .cachedIn(viewModelScope)
+            //stateFlow 로 변환
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), PagingData.empty())
+
+    private val _searchPagingResult = MutableStateFlow<PagingData<Book>>(PagingData.empty())
+
+    //ui 에는 변경 불가능한 searchPagingResult 를 공개
+    val searchPagingResult: StateFlow<PagingData<Book>> = _searchPagingResult.asStateFlow()
+
+    fun searchBooksPaging(query: String) {
+        viewModelScope.launch {
+            bookSearchRepository.searchBooksPaging(query, getSortMode())
+                .cachedIn(viewModelScope)
+                .collect {
+                    _searchPagingResult.value = it
+                }
+        }
+    }
+
+    // WorkManager
+    fun setWork() {
+        val constraints = Constraints.Builder()
+            //충전중일때만
+            .setRequiresCharging(true)
+            //배터리 잔량 충분
+            .setRequiresBatteryNotLow(true)
+            .build()
+
+        // 15분에 한번식 work
+        val workRequest = PeriodicWorkRequestBuilder<CacheDeleteWorker>(15, TimeUnit.MINUTES)
+            //constraints 반영
+            .setConstraints(constraints)
+            .build()
+
+        workManager.enqueueUniquePeriodicWork(
+            WORKER_KEY, ExistingPeriodicWorkPolicy.REPLACE, workRequest
+        )
+    }
+
+    fun deleteWork() = workManager.cancelUniqueWork(WORKER_KEY)
+
+    //현재 work 의 상태를 liveData type 으로 반환
+    fun getWorkStatus(): LiveData<MutableList<WorkInfo>> =
+        workManager.getWorkInfosForUniqueWorkLiveData(WORKER_KEY)
 }

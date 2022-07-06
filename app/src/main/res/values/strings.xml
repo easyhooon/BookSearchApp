@@ -9,5 +9,13 @@
     <string name="accuracy">Accuracy</string>
     <string name="latest">Latest</string>
     <string name="sort_by">Sort by</string>
+    <string name="error_message">Error message</string>
+    <string name="retry">Retry</string>
+    <string name="no_result">No result</string>
+    <string name="cache_policy">Cache policy</string>
+    <string name="delete_periodically">Delete periodically</string>
+    <string name="status">Status</string>
+    <string name="no_works">No works</string>
+    <string name="search_">Search..</string>
 
 </resources>
