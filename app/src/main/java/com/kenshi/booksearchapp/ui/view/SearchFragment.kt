@@ -2,6 +2,7 @@ package com.kenshi.booksearchapp.ui.view
 
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +15,19 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kenshi.booksearchapp.common.collectLatestLifecycleFlow
+import com.kenshi.booksearchapp.common.repeatOnStarted
+import com.kenshi.booksearchapp.common.textChangesToFlow
 import com.kenshi.booksearchapp.databinding.FragmentSearchBinding
 import com.kenshi.booksearchapp.ui.adapter.BookSearchLoadStateAdapter
 import com.kenshi.booksearchapp.ui.adapter.BookSearchPagingAdapter
 import com.kenshi.booksearchapp.ui.viewmodel.SearchViewModel
 import com.kenshi.booksearchapp.util.Constants.SEARCH_BOOKS_TIME_DELAY
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 
 @AndroidEntryPoint
@@ -48,17 +56,65 @@ class SearchFragment : Fragment() {
         //bookSearchViewModel = (activity as MainActivity).bookSearchViewModel
 
         setupRecyclerView()
-        searchBooks()
+        //searchBooks()
         setupLoadState()
-
         initObservers()
     }
 
+    @OptIn(FlowPreview::class)
     private fun initObservers() {
 //        bookSearchViewModel.searchResult.observe(viewLifecycleOwner) { response ->
 //            val books = response.documents
 //            bookSearchAdapter.submitList(books)
 //        }
+
+//        lifecycle 처리
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                val editTextFlow = binding.etSearch.textChangesToFlow()
+//
+//                editTextFlow
+//                    .debounce(SEARCH_BOOKS_TIME_DELAY)
+//                    .filter {
+//                        it?.length!! > 0
+//                    }
+//                    .onEach { text ->
+//                        Log.d("editTextFlow", "$text")
+//
+//                        text?.let {
+//                            val query = it.toString().trim()
+//                            searchViewModel.searchBooksPaging(query)
+//                            searchViewModel.query = query
+//                        }
+//                    }
+//                    .launchIn(this)
+//            }
+//        }
+
+        // 확장함수
+        // 하나의 flow 에서 수명 주기 인식 수집을 진행하기만 하면 되는 경우엔 Flow.flowWithLifecycle 메서드를 사용하면
+        // 코드가 단순해져서 좋음
+        repeatOnStarted {
+            val editTextFlow = binding.etSearch.textChangesToFlow()
+
+            editTextFlow
+                .debounce(SEARCH_BOOKS_TIME_DELAY)
+                .filter {
+                    it?.length!! > 0
+                }
+                .onEach { text ->
+                    Log.d("editTextFlow", "$text")
+
+                    text?.let {
+                        val query = it.toString().trim()
+                        searchViewModel.searchBooksPaging(query)
+                        searchViewModel.query = query
+                    }
+                }
+                .launchIn(this)
+
+        }
+
         collectLatestLifecycleFlow(searchViewModel.searchPagingResult) {
             bookSearchAdapter.submitData(it)
         }
@@ -88,6 +144,7 @@ class SearchFragment : Fragment() {
         }
     }
 
+    // Flow Debounce 를 사용하는 방법으로 변경해보기
     private fun searchBooks() = with(binding) {
         var startTime = System.currentTimeMillis()
         var endTime: Long

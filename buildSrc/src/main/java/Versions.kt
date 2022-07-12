@@ -28,7 +28,7 @@ object Versions {
     const val KOTLIN_SERIALIZATION = "1.3.2"
     const val DATASTORE = "1.0.0"
     const val PAGING = "3.1.1"
-    const val WORKMANGER = "2.7.1"
+    const val WORK_MANAGER = "2.7.1"
     const val HILT = "2.42"
     const val ACTIVITY_KTX = "1.5.0"
     const val FRAGMENT_KTX = "1.5.0"
