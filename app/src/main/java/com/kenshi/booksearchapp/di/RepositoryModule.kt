@@ -1,7 +1,7 @@
 package com.kenshi.booksearchapp.di
 
-import com.kenshi.booksearchapp.data.repository.BookSearchRepository
-import com.kenshi.booksearchapp.data.repository.BookSearchRepositoryImpl
+import com.kenshi.booksearchapp.repository.BookSearchRepository
+import com.kenshi.booksearchapp.repository.BookSearchRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

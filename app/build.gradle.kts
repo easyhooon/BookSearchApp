@@ -18,7 +18,9 @@ android {
         versionCode = DefaultConfig.VERSION_CODE
         versionName = DefaultConfig.VERSION_NAME
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // Hilt 를 이용한 통합 테스트를 위한 계측 테스트 러너 변경
+        testInstrumentationRunner = "com.kenshi.booksearchapp.HiltTestRunner"
     }
 
     buildTypes {
@@ -46,6 +48,13 @@ android {
     kapt {
         correctErrorTypes = true
     }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+        animationsDisabled = true
+    }
 }
 
 dependencies {
@@ -54,9 +63,33 @@ dependencies {
     implementation(Dependencies.APP_COMPAT)
     implementation(Dependencies.MATERIAL)
     implementation(Dependencies.CONSTRAINT_LAYOUT)
-    implementation(Testing.JUNIT4)
+
+
+    // Testing for Local test
+    testImplementation(Testing.JUNIT4)
+    testImplementation("androidx.test.ext:truth:1.4.0")
+    testImplementation("androidx.test:runner:1.4.0")
+    testImplementation("org.robolectric:robolectric:4.8.1")
+    testImplementation("androidx.test.ext:junit-ktx:1.1.3")
+    testImplementation("androidx.test:core:1.4.0")
+    // Coroutin Test
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2")
+
+
+    // Testing for 계측 테스트
     androidTestImplementation(Testing.ANDROID_JUNIT)
     androidTestImplementation(Testing.ESPRESSO_CORE)
+    // 에스프레소 적용 대상 확장
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.4.0")
+    androidTestImplementation("org.hamcrest:hamcrest:2.2")
+    androidTestImplementation("androidx.test:core:1.4.0") // Test Core
+    androidTestImplementation("androidx.test.ext:truth:1.4.0")
+    androidTestImplementation("androidx.test:runner:1.4.0")
+    // Coroutin Test
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2")
+    // Hilt For Test
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.42")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.42")
 
     // Retrofit
     implementation(Dependencies.RETROFIT)
