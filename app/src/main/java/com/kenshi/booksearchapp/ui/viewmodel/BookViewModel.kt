@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.kenshi.booksearchapp.data.model.Book
 import com.kenshi.booksearchapp.repository.BookSearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,7 +15,7 @@ class BookViewModel @Inject constructor(
 ) : ViewModel() {
 
     // Room
-    fun saveBooks(book: Book) = viewModelScope.launch(Dispatchers.IO) {
+    fun saveBooks(book: Book) = viewModelScope.launch {
         bookSearchRepository.insertBooks(book)
     }
 

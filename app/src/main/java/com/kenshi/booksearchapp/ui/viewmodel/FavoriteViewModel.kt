@@ -7,7 +7,6 @@ import androidx.paging.cachedIn
 import com.kenshi.booksearchapp.data.model.Book
 import com.kenshi.booksearchapp.repository.BookSearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -29,17 +28,17 @@ class FavoriteViewModel @Inject constructor(
     // Paging
     val favoritePagingBooks: StateFlow<PagingData<Book>> =
         bookSearchRepository.getFavoritePagingBooks()
-            //코투린이 데이터 스트림을 캐시하고 공유가능하게 만들어줌
+            //코루틴이 데이터 스트림을 캐시하고 공유가능하게 만들어줌
             .cachedIn(viewModelScope)
             //stateFlow 로 변환
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), PagingData.empty())
 
     // Room
-    fun saveBooks(book: Book) = viewModelScope.launch(Dispatchers.IO) {
+    fun saveBooks(book: Book) = viewModelScope.launch {
         bookSearchRepository.insertBooks(book)
     }
 
-    fun deleteBooks(book: Book) = viewModelScope.launch(Dispatchers.IO) {
+    fun deleteBooks(book: Book) = viewModelScope.launch {
         bookSearchRepository.deleteBooks(book)
     }
 }

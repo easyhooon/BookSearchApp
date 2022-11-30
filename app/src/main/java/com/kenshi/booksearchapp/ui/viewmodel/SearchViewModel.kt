@@ -8,7 +8,6 @@ import androidx.paging.cachedIn
 import com.kenshi.booksearchapp.data.model.Book
 import com.kenshi.booksearchapp.repository.BookSearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -43,7 +42,7 @@ class SearchViewModel @Inject constructor(
     var query = String()
         set(value) {
             field = value
-            savedStateHandle.set(SAVE_STATE_KEY, value)
+            savedStateHandle[SAVE_STATE_KEY] = value
         }
 
     init {
@@ -51,7 +50,7 @@ class SearchViewModel @Inject constructor(
     }
 
     // DataStore
-    suspend fun getSortMode() = withContext(Dispatchers.IO) {
+    private suspend fun getSortMode() = withContext(viewModelScope.coroutineContext) {
         bookSearchRepository.getSortMode().first()
     }
 
