@@ -32,7 +32,6 @@ class SettingsViewModel @Inject constructor(
     // 설정 값 특성상 전체 데이터 스트림을 구독할 필요x
     // flow 에서 단일 스트링값을 가져오기 위해 .first()
     // withContext(Dispatchers.IO) 디스패처의 종류와는 상관없이 withContext 블럭은 반드시 값을 반환하고 종료한다고 한다
-    // 음 그러면 Dispatcher 어떻게 띠지
 //    suspend fun getSortMode() = withContext(Dispatchers.IO) {
 //        bookSearchRepository.getSortMode().first()
 //    }
