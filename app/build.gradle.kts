@@ -25,7 +25,6 @@ android {
 
     buildTypes {
         named("release") {
-//            minifyEnabled false
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -67,9 +66,9 @@ dependencies {
     // Testing for Local test
     testImplementation(Testing.JUNIT4)
     testImplementation("androidx.test.ext:truth:1.5.0")
-    testImplementation("androidx.test:runner:1.5.1")
+    testImplementation("androidx.test:runner:1.5.2")
     testImplementation("org.robolectric:robolectric:4.8.1")
-    testImplementation("androidx.test.ext:junit-ktx:1.1.4")
+    testImplementation("androidx.test.ext:junit-ktx:1.1.5")
     testImplementation("androidx.test:core:1.5.0")
     // Coroutine Test
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
@@ -78,16 +77,16 @@ dependencies {
     androidTestImplementation(Testing.ANDROID_JUNIT)
     androidTestImplementation(Testing.ESPRESSO_CORE)
     // 에스프레소 적용 대상 확장
-    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.0")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
     androidTestImplementation("org.hamcrest:hamcrest:2.2")
     androidTestImplementation("androidx.test:core:1.5.0") // Test Core
     androidTestImplementation("androidx.test.ext:truth:1.5.0")
-    androidTestImplementation("androidx.test:runner:1.5.1")
+    androidTestImplementation("androidx.test:runner:1.5.2")
     // Coroutine Test
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
     // Hilt For Test
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.43")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.43.2")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.44.2")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.44")
 
     // Retrofit
     implementation(Dependencies.RETROFIT)
@@ -149,4 +148,6 @@ dependencies {
     // Hilt extension
     implementation(Dependencies.HILT_EXTENSION_WORK)
     kapt(Dependencies.HILT_EXTENSION_KAPT)
+
+    implementation(Dependencies.SPLASH_SCREEN)
 }

@@ -33,4 +33,5 @@ object Versions {
     const val ACTIVITY_KTX = "1.5.0"
     const val FRAGMENT_KTX = "1.5.0"
     const val HILT_EXTENSION = "1.0.0"
+    const val SPLASH_SCREEN ="1.0.0"
 }

@@ -1,7 +1,6 @@
 package com.kenshi.booksearchapp.ui.view
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,13 +9,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kenshi.booksearchapp.R
 import com.kenshi.booksearchapp.databinding.ActivityMainBinding
+import com.kenshi.booksearchapp.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-    private val binding: ActivityMainBinding by lazy {
-        ActivityMainBinding.inflate(layoutInflater)
-    }
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     //lateinit var bookSearchViewModel: BookSearchViewModel
     private lateinit var navController: NavController
@@ -26,22 +23,36 @@ class MainActivity : AppCompatActivity() {
 //    private val Context.dataStore by preferencesDataStore(DATASTORE_NAME)
 //    private val workManager = WorkManager.getInstance(application)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//
+//        super.onCreate(savedInstanceState)
+//        setContentView(binding.root)
+//
+//        /*
+//        setupBottomNavigationView()
+//        if (savedInstanceState == null) {
+//            binding.bottomNavigationView.selectedItemId = R.id.fragment_search
+//        }*/
+//        setupNavigation()
+//
+////        val database = BookSearchDatabase.getInstance(this)
+////        val bookSearchRepository = BookSearchRepositoryImpl(database, dataStore)
+////        val factory = BookSearchViewModelProviderFactory(bookSearchRepository, workManager, this)
+////        bookSearchViewModel = ViewModelProvider(this, factory)[BookSearchViewModel::class.java]
+//    }
 
-        /*
-        setupBottomNavigationView()
-        if (savedInstanceState == null) {
-            binding.bottomNavigationView.selectedItemId = R.id.fragment_search
-        }*/
-        setupNavigation()
-
-//        val database = BookSearchDatabase.getInstance(this)
-//        val bookSearchRepository = BookSearchRepositoryImpl(database, dataStore)
-//        val factory = BookSearchViewModelProviderFactory(bookSearchRepository, workManager, this)
-//        bookSearchViewModel = ViewModelProvider(this, factory)[BookSearchViewModel::class.java]
+    override fun getViewBinding(): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
     }
+
+    override fun preload() {
+        installSplashScreen()
+    }
+
+    override fun init() {
+        setupNavigation()
+    }
+
 
     private fun setupNavigation() {
         val host =
