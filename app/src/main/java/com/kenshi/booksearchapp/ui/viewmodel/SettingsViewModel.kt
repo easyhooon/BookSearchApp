@@ -3,8 +3,15 @@ package com.kenshi.booksearchapp.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.work.*
-import com.kenshi.booksearchapp.domain.BookSearchRepository
+import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
+import com.kenshi.booksearchapp.domain.usecase.GetCacheDeleteModeUseCase
+import com.kenshi.booksearchapp.domain.usecase.GetSortModeUseCase
+import com.kenshi.booksearchapp.domain.usecase.SaveCacheDeleteModeUseCase
+import com.kenshi.booksearchapp.domain.usecase.SaveSortModeUseCase
 import com.kenshi.booksearchapp.worker.CacheDeleteWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
@@ -15,7 +22,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val bookSearchRepository: BookSearchRepository,
+    private val saveSortModeUseCase: SaveSortModeUseCase,
+    private val getSortModeUseCase: GetSortModeUseCase,
+    private val saveCacheDeleteModeUseCase: SaveCacheDeleteModeUseCase,
+    private val getCacheDeleteModeUseCase: GetCacheDeleteModeUseCase,
     private val workManager: WorkManager,
 ) : ViewModel() {
 
@@ -26,7 +36,7 @@ class SettingsViewModel @Inject constructor(
 //    }
 
     fun saveSortMode(value: String) = viewModelScope.launch {
-        bookSearchRepository.saveSortMode(value)
+        saveSortModeUseCase(value)
     }
 
     // 설정 값 특성상 전체 데이터 스트림을 구독할 필요x
@@ -37,15 +47,15 @@ class SettingsViewModel @Inject constructor(
 //    }
 
     suspend fun getSortMode() = withContext(viewModelScope.coroutineContext) {
-        bookSearchRepository.getSortMode().first()
+        getSortModeUseCase().first()
     }
 
     fun saveCacheDeleteMode(value: Boolean) = viewModelScope.launch {
-        bookSearchRepository.saveCacheDeleteMode(value)
+        saveCacheDeleteModeUseCase(value)
     }
 
     suspend fun getCacheDeleteMode() = withContext(viewModelScope.coroutineContext) {
-        bookSearchRepository.getCacheDeleteMode().first()
+        getCacheDeleteModeUseCase().first()
     }
 
     // WorkManager

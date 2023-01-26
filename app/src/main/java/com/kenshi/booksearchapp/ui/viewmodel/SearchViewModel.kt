@@ -6,7 +6,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.kenshi.booksearchapp.data.model.Book
-import com.kenshi.booksearchapp.domain.BookSearchRepository
+import com.kenshi.booksearchapp.domain.usecase.GetSortModeUseCase
+import com.kenshi.booksearchapp.domain.usecase.SearchBooksUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val bookSearchRepository: BookSearchRepository,
+    private val searchBooksUseCase: SearchBooksUseCase,
+    private val getSortModeUseCase: GetSortModeUseCase,
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -27,7 +29,7 @@ class SearchViewModel @Inject constructor(
 
     fun searchBooksPaging(query: String) {
         viewModelScope.launch {
-            bookSearchRepository.searchBooks(query, getSortMode())
+            searchBooksUseCase(query, getSortMode())
                 .cachedIn(viewModelScope)
                 .collect {
                     _searchPagingResult.value = it
@@ -46,7 +48,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private suspend fun getSortMode() = withContext(viewModelScope.coroutineContext) {
-        bookSearchRepository.getSortMode().first()
+        getSortModeUseCase().first()
     }
 
     companion object {

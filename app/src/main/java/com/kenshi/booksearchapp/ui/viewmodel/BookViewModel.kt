@@ -3,7 +3,8 @@ package com.kenshi.booksearchapp.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kenshi.booksearchapp.data.model.Book
-import com.kenshi.booksearchapp.domain.BookSearchRepository
+import com.kenshi.booksearchapp.domain.usecase.GetFavoriteBooksForTestUseCase
+import com.kenshi.booksearchapp.domain.usecase.InsertBookUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -11,16 +12,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BookViewModel @Inject constructor(
-    private val bookSearchRepository: BookSearchRepository,
+    private val insertBookUseCase: InsertBookUseCase,
+    private val getFavoriteBooksForTestUseCase: GetFavoriteBooksForTestUseCase
 ) : ViewModel() {
 
-    fun saveBooks(book: Book) = viewModelScope.launch {
-        bookSearchRepository.insertBook(book)
+    fun saveBooks(book: Book) = viewModelScope.launch() {
+        insertBookUseCase(book)
     }
 
     // For test
     // repository 의 값을 반환 받는 변수
     // viewModel 기능을 체크 하는데 repository 반환 값 그 자체에는 상관이 없기 때문에
     // repository fake double 을 사용
-    val favoriteBooks: Flow<List<Book>> = bookSearchRepository.getFavoriteBooksForTest()
+    val favoriteBooks: Flow<List<Book>> = getFavoriteBooksForTestUseCase()
 }
