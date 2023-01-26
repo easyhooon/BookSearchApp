@@ -15,31 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    // lateinit var bookSearchViewModel: BookSearchViewModel
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-
-    // datastore 의 singleton 객체
-//    private val Context.dataStore by preferencesDataStore(DATASTORE_NAME)
-//    private val workManager = WorkManager.getInstance(application)
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//
-//        super.onCreate(savedInstanceState)
-//        setContentView(binding.root)
-//
-//        /*
-//        setupBottomNavigationView()
-//        if (savedInstanceState == null) {
-//            binding.bottomNavigationView.selectedItemId = R.id.fragment_search
-//        }*/
-//        setupNavigation()
-//
-////        val database = BookSearchDatabase.getInstance(this)
-////        val bookSearchRepository = BookSearchRepositoryImpl(database, dataStore)
-////        val factory = BookSearchViewModelProviderFactory(bookSearchRepository, workManager, this)
-////        bookSearchViewModel = ViewModelProvider(this, factory)[BookSearchViewModel::class.java]
-//    }
 
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
@@ -67,7 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         // Top 레벨의 destination 을 하나씩 지정해줌
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.fragment_search, R.id.fragment_favorite, R.id.fragment_settings
+                R.id.fragment_search_books, R.id.fragment_favorite_books, R.id.fragment_settings
             )
         )
     }
@@ -75,31 +52,4 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
-//      Navigation 도입으로 필요가 없어짐
-//    private fun setupBottomNavigationView() {
-//        binding.bottomNavigationView.setOnItemSelectedListener { item ->
-//            when (item.itemId) {
-//                R.id.fragment_search -> {
-//                    supportFragmentManager.beginTransaction()
-//                        .replace(R.id.frame_layout, SearchFragment())
-//                        .commit()
-//                    true
-//                }
-//                R.id.fragment_favorite -> {
-//                    supportFragmentManager.beginTransaction()
-//                        .replace(R.id.frame_layout, FavoriteFragment())
-//                        .commit()
-//                    true
-//                }
-//                R.id.fragment_settings -> {
-//                    supportFragmentManager.beginTransaction()
-//                        .replace(R.id.frame_layout, SettingsFragment())
-//                        .commit()
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
-//    }
 }

@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/booksearch_nav_graph"
-    app:startDestination="@id/fragment_search">
+    app:startDestination="@id/fragment_search_books">
 
     <fragment
-        android:id="@+id/fragment_favorite"
-        android:name="com.kenshi.booksearchapp.presentation.screen.FavoriteFragment"
+        android:id="@+id/fragment_favorite_books"
+        android:name="com.kenshi.booksearchapp.presentation.screen.FavoriteBooksFragment"
         android:label="@string/favorite"
-        tools:layout="@layout/fragment_favorite">
+        tools:layout="@layout/fragment_favorite_books">
         <action
-            android:id="@+id/action_fragment_favorite_to_fragment_book"
-            app:destination="@id/fragment_book"
+            android:id="@+id/action_fragment_favorite_books_to_fragment_book_detail"
+            app:destination="@id/fragment_book_detail"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -26,13 +26,13 @@
         tools:layout="@layout/fragment_settings" />
 
     <fragment
-        android:id="@+id/fragment_search"
-        android:name="com.kenshi.booksearchapp.presentation.screen.SearchFragment"
+        android:id="@+id/fragment_search_books"
+        android:name="com.kenshi.booksearchapp.presentation.screen.SearchBooksFragment"
         android:label="@string/search"
-        tools:layout="@layout/fragment_search">
+        tools:layout="@layout/fragment_search_books">
         <action
-            android:id="@+id/action_fragment_search_to_fragment_book"
-            app:destination="@id/fragment_book"
+            android:id="@+id/action_fragment_search_books_to_fragment_book_detail"
+            app:destination="@id/fragment_book_detail"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -40,10 +40,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/fragment_book"
-        android:name="com.kenshi.booksearchapp.presentation.screen.BookFragment"
+        android:id="@+id/fragment_book_detail"
+        android:name="com.kenshi.booksearchapp.presentation.screen.BookDetailFragment"
         android:label="@string/book_info"
-        tools:layout="@layout/fragment_book">
+        tools:layout="@layout/fragment_book_detail">
         <argument
             android:name="book"
             app:argType="com.kenshi.booksearchapp.presentation.item.BookItem" />

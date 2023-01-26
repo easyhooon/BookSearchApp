@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BookViewModel @Inject constructor(
+class BookDetailViewModel @Inject constructor(
     private val insertBookUseCase: InsertBookUseCase,
     private val getFavoriteBooksForTestUseCase: GetFavoriteBooksForTestUseCase
 ) : ViewModel() {

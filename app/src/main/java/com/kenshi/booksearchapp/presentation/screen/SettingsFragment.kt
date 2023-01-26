@@ -17,15 +17,12 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(R.layout.fragment_settings) {
 
-    // private lateinit var bookSearchViewModel: BookSearchViewModel
-    // private val bookSearchViewModel by activityViewModels<BookSearchViewModel>()
     private val settingsViewModel by viewModels<SettingsViewModel>()
 
     override fun getViewBinding() = FragmentSettingsBinding.inflate(layoutInflater)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // bookSearchViewModel = (activity as MainActivity).bookSearchViewModel
 
         saveSettings()
         loadSettings()

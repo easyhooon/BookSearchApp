@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchViewModel @Inject constructor(
+class SearchBooksViewModel @Inject constructor(
     private val searchBooksUseCase: SearchBooksUseCase,
     private val getSortModeUseCase: GetSortModeUseCase,
     private val savedStateHandle: SavedStateHandle,

@@ -19,13 +19,13 @@ import org.junit.Test
 // UI Layer + Data Layer 두 층에 걸친 동작을 테스트
 // viewModel 밑 repository 동작 클래스
 @MediumTest
-class BookViewModelTest {
+class BookDetailViewModelTest {
 
-    private lateinit var viewModel: BookViewModel
+    private lateinit var viewModel: BookDetailViewModel
 
     @Before
     fun setUp() {
-        viewModel = BookViewModel(
+        viewModel = BookDetailViewModel(
             InsertBookUseCase(FakeBookSearchRepository()),
             GetFavoriteBooksForTestUseCase(FakeBookSearchRepository())
         )

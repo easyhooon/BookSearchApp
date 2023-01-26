@@ -22,18 +22,11 @@ import javax.inject.Inject
 // TODO 함수의 파라미터가 없을 경우엔 val 로 지정해주지 않아도 됨
 // 해당 내용 관련 학습
 @HiltViewModel
-class FavoriteViewModel @Inject constructor(
+class FavoriteBooksViewModel @Inject constructor(
     private val getFavoriteBooksUseCase: GetFavoriteBooksUseCase,
     private val insertBookUseCase: InsertBookUseCase,
     private val deleteBookUseCase: DeleteBookUseCase
 ) : ViewModel() {
-
-//    val favoriteBooks: StateFlow<List<Book>> = bookSearchRepository.getFavoriteBooks()
-//        .stateIn(
-//            viewModelScope,
-//            SharingStarted.WhileSubscribed(5000),
-//            listOf()
-//        )
 
     val favoriteBooks: StateFlow<PagingData<BookItem>> =
         getFavoriteBooksUseCase()

@@ -8,28 +8,23 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.kenshi.booksearchapp.R
-import com.kenshi.booksearchapp.databinding.FragmentBookBinding
+import com.kenshi.booksearchapp.databinding.FragmentBookDetailBinding
 import com.kenshi.booksearchapp.presentation.base.BaseFragment
-import com.kenshi.booksearchapp.presentation.viewmodel.BookViewModel
+import com.kenshi.booksearchapp.presentation.viewmodel.BookDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BookFragment : BaseFragment<FragmentBookBinding>(R.layout.fragment_book) {
+class BookDetailFragment : BaseFragment<FragmentBookDetailBinding>(R.layout.fragment_book_detail) {
 
-    private val args by navArgs<BookFragmentArgs>()
+    private val args by navArgs<BookDetailFragmentArgs>()
 
-    // private lateinit var bookSearchViewModel: BookSearchViewModel
-    // private val bookSearchViewModel by activityViewModels<BookSearchViewModel>()
-    private val bookViewModel by viewModels<BookViewModel>()
+    private val bookDetailViewModel by viewModels<BookDetailViewModel>()
 
-    override fun getViewBinding() = FragmentBookBinding.inflate(layoutInflater)
+    override fun getViewBinding() = FragmentBookDetailBinding.inflate(layoutInflater)
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // 액티비티에서 뷰모델을 생성하던 작업을 이제 힐트가 해줌 필요 없어짐
-        // bookSearchViewModel = (activity as MainActivity).bookSearchViewModel
 
         val book = args.book
         binding.webview.apply {
@@ -39,7 +34,7 @@ class BookFragment : BaseFragment<FragmentBookBinding>(R.layout.fragment_book) {
         }
 
         binding.fabFavorite.setOnClickListener {
-            bookViewModel.saveBooks(book)
+            bookDetailViewModel.saveBooks(book)
             Snackbar.make(view, getString(R.string.book_has_saved), Snackbar.LENGTH_SHORT).show()
         }
     }
