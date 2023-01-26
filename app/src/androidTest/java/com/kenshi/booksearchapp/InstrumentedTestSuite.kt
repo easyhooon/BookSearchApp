@@ -1,7 +1,7 @@
 package com.kenshi.booksearchapp
 
 import com.kenshi.booksearchapp.data.db.BookSearchDaoTest
-import com.kenshi.booksearchapp.ui.view.MainActivityTest
+import com.kenshi.booksearchapp.presentation.screen.MainActivityTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.runner.RunWith
 import org.junit.runners.Suite

@@ -3,6 +3,7 @@ package com.kenshi.booksearchapp.data.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.kenshi.booksearchapp.data.local.BookSearchDao
 import com.kenshi.booksearchapp.data.model.Book
 
 @Database(
@@ -10,6 +11,7 @@ import com.kenshi.booksearchapp.data.model.Book
     version = 1,
     exportSchema = false
 )
+
 //typeConverter 를 지정 하면 room 에서 알아서 type convert 작업을 처리해준다.
 @TypeConverters(OrmConverter::class)
 abstract class BookSearchDatabase : RoomDatabase() {
@@ -18,7 +20,7 @@ abstract class BookSearchDatabase : RoomDatabase() {
     abstract fun bookSearchDao(): BookSearchDao
 
     // Hilt 도입 이후 필 요없어짐
-    //singleton setting
+    // singleton setting
 //    companion object {
 //        @Volatile
 //        private var INSTANCE: BookSearchDatabase? = null

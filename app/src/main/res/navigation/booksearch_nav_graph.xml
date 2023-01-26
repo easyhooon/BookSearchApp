@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_favorite"
-        android:name="com.kenshi.booksearchapp.ui.view.FavoriteFragment"
+        android:name="com.kenshi.booksearchapp.presentation.screen.FavoriteFragment"
         android:label="@string/favorite"
         tools:layout="@layout/fragment_favorite">
         <action
@@ -21,13 +21,13 @@
 
     <fragment
         android:id="@+id/fragment_settings"
-        android:name="com.kenshi.booksearchapp.ui.view.SettingsFragment"
+        android:name="com.kenshi.booksearchapp.presentation.screen.SettingsFragment"
         android:label="@string/settings"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/fragment_search"
-        android:name="com.kenshi.booksearchapp.ui.view.SearchFragment"
+        android:name="com.kenshi.booksearchapp.presentation.screen.SearchFragment"
         android:label="@string/search"
         tools:layout="@layout/fragment_search">
         <action
@@ -41,12 +41,12 @@
 
     <fragment
         android:id="@+id/fragment_book"
-        android:name="com.kenshi.booksearchapp.ui.view.BookFragment"
+        android:name="com.kenshi.booksearchapp.presentation.screen.BookFragment"
         android:label="@string/book_info"
         tools:layout="@layout/fragment_book">
         <argument
             android:name="book"
-            app:argType="com.kenshi.booksearchapp.data.model.Book" />
+            app:argType="com.kenshi.booksearchapp.presentation.item.BookItem" />
     </fragment>
 
 </navigation>

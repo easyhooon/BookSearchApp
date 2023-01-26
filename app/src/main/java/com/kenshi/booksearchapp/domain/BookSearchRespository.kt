@@ -1,7 +1,7 @@
 package com.kenshi.booksearchapp.domain
 
 import androidx.paging.PagingData
-import com.kenshi.booksearchapp.data.model.Book
+import com.kenshi.booksearchapp.domain.entity.BookEntity
 import kotlinx.coroutines.flow.Flow
 
 interface BookSearchRepository {
@@ -14,12 +14,12 @@ interface BookSearchRepository {
 //    ): Response<SearchResponse>
 
     // Room
-    suspend fun insertBook(book: Book)
+    suspend fun insertBook(bookEntity: BookEntity)
 
-    suspend fun deleteBook(book: Book)
+    suspend fun deleteBook(bookEntity: BookEntity)
 
     // fun getFavoriteBooks(): LiveData<List<Book>>
-    fun getFavoriteBooksForTest(): Flow<List<Book>>
+    fun getFavoriteBooksForTest(): Flow<List<BookEntity>>
 
     // DataStore
     suspend fun saveSortMode(mode: String)
@@ -31,7 +31,7 @@ interface BookSearchRepository {
     suspend fun getCacheDeleteMode(): Flow<Boolean>
 
     // Paging
-    fun getFavoriteBooks(): Flow<PagingData<Book>>
+    fun getFavoriteBooks(): Flow<PagingData<BookEntity>>
 
-    fun searchBooks(query: String, sort: String): Flow<PagingData<Book>>
+    fun searchBooks(query: String, sort: String): Flow<PagingData<BookEntity>>
 }

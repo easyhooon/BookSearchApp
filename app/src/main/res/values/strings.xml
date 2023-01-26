@@ -18,5 +18,6 @@
     <string name="no_works">No works</string>
     <string name="search_">Search..</string>
     <string name="error_occurred">Error occurred</string>
+    <string name="book_has_saved">Book has saved</string>
 
 </resources>

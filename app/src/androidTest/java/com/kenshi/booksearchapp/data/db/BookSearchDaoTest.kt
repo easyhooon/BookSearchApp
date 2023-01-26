@@ -1,10 +1,8 @@
 package com.kenshi.booksearchapp.data.db
 
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
+import com.kenshi.booksearchapp.data.local.BookSearchDao
 import com.kenshi.booksearchapp.data.model.Book
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -15,7 +13,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -60,8 +57,8 @@ class BookSearchDaoTest {
     @Test
     fun insert_book_to_db() = runTest {
         val book = Book(
-            listOf("a"), "b", "c","d", 0,"e",
-            0,"f","g","h", listOf("i"), "j"
+            "a", "b", "c","d", "e", listOf("f"),
+            "g",listOf("h"),0,0, "i", "j"
         )
         dao.insertBook(book)
 
@@ -74,8 +71,8 @@ class BookSearchDaoTest {
     @Test
     fun delete_book_to_db() = runTest {
         val book = Book(
-            listOf("a"), "b", "c","d", 0,"e",
-            0,"f","g","h", listOf("i"), "j"
+            "a", "b", "c","d", "e", listOf("f"),
+            "g",listOf("h"),0,0, "i", "j"
         )
         dao.insertBook(book)
         dao.deleteBook(book)
