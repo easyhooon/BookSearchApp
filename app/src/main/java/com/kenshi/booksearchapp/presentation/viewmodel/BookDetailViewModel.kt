@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.kenshi.booksearchapp.domain.usecase.GetFavoriteBooksForTestUseCase
 import com.kenshi.booksearchapp.domain.usecase.InsertBookUseCase
 import com.kenshi.booksearchapp.presentation.item.BookItem
-import com.kenshi.booksearchapp.presentation.mapper.toDomain
+import com.kenshi.booksearchapp.presentation.mapper.toEntity
 import com.kenshi.booksearchapp.presentation.mapper.toItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +20,7 @@ class BookDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun saveBooks(bookItem: BookItem) = viewModelScope.launch {
-        insertBookUseCase(bookItem.toDomain())
+        insertBookUseCase(bookItem.toEntity())
     }
 
     // For test

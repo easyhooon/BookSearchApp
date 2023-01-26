@@ -3,7 +3,7 @@ package com.kenshi.booksearchapp.data.mapper
 import com.kenshi.booksearchapp.data.model.Book
 import com.kenshi.booksearchapp.domain.entity.BookEntity
 
-internal fun Book.toDomain() = BookEntity(
+internal fun Book.toEntity() = BookEntity(
     title = title,
     contents = contents,
     url = url,

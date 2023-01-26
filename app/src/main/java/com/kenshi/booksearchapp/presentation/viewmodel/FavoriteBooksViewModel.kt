@@ -9,7 +9,7 @@ import com.kenshi.booksearchapp.domain.usecase.DeleteBookUseCase
 import com.kenshi.booksearchapp.domain.usecase.GetFavoriteBooksUseCase
 import com.kenshi.booksearchapp.domain.usecase.InsertBookUseCase
 import com.kenshi.booksearchapp.presentation.item.BookItem
-import com.kenshi.booksearchapp.presentation.mapper.toDomain
+import com.kenshi.booksearchapp.presentation.mapper.toEntity
 import com.kenshi.booksearchapp.presentation.mapper.toItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -41,10 +41,10 @@ class FavoriteBooksViewModel @Inject constructor(
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), PagingData.empty())
 
     fun saveBook(bookItem: BookItem) = viewModelScope.launch {
-        insertBookUseCase(bookItem.toDomain())
+        insertBookUseCase(bookItem.toEntity())
     }
 
     fun deleteBook(bookItem: BookItem) = viewModelScope.launch {
-        deleteBookUseCase(bookItem.toDomain())
+        deleteBookUseCase(bookItem.toEntity())
     }
 }

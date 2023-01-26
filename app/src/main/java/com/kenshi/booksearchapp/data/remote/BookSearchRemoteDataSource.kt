@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.kenshi.booksearchapp.data.paging.BookSearchPagingSource
 import com.kenshi.booksearchapp.data.api.BookSearchApi
-import com.kenshi.booksearchapp.data.mapper.toDomain
+import com.kenshi.booksearchapp.data.mapper.toEntity
 import com.kenshi.booksearchapp.domain.entity.BookEntity
 import com.kenshi.booksearchapp.util.Constants
 import kotlinx.coroutines.flow.Flow
@@ -37,7 +37,7 @@ class BookSearchRemoteDataSource @Inject constructor(
             // 결과를 flow 로 변환
         ).flow.map { pagingData ->
             pagingData.map { book ->
-                book.toDomain()
+                book.toEntity()
             }
         }
     }

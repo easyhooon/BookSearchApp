@@ -13,7 +13,7 @@ import androidx.paging.map
 import com.kenshi.booksearchapp.data.db.BookSearchDatabase
 import com.kenshi.booksearchapp.data.local.BookSearchLocalDataSource.PreferenceKeys.CACHE_DELETE_MODE
 import com.kenshi.booksearchapp.data.local.BookSearchLocalDataSource.PreferenceKeys.SORT_MODE
-import com.kenshi.booksearchapp.data.mapper.toDomain
+import com.kenshi.booksearchapp.data.mapper.toEntity
 import com.kenshi.booksearchapp.data.mapper.toModel
 import com.kenshi.booksearchapp.domain.entity.BookEntity
 import com.kenshi.booksearchapp.util.Constants
@@ -40,7 +40,7 @@ class BookSearchLocalDataSource @Inject constructor(
     fun getFavoriteBooksForTest(): Flow<List<BookEntity>> {
         return bookSearchDatabase.bookSearchDao().getFavoriteBooks().map { list ->
             list.map { book ->
-                book.toDomain()
+                book.toEntity()
             }
         }
     }
@@ -124,7 +124,7 @@ class BookSearchLocalDataSource @Inject constructor(
             // 결과를 flow 로 변환
         ).flow.map { pagingData ->
             pagingData.map { book ->
-                book.toDomain()
+                book.toEntity()
             }
         }
     }
