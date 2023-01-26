@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.work.*
-import com.kenshi.booksearchapp.repository.BookSearchRepository
+import com.kenshi.booksearchapp.domain.BookSearchRepository
 import com.kenshi.booksearchapp.worker.CacheDeleteWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first

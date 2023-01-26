@@ -9,6 +9,7 @@ import com.kenshi.booksearchapp.data.api.BookSearchApi
 import com.kenshi.booksearchapp.data.db.BookSearchDatabase
 import com.kenshi.booksearchapp.data.model.Book
 import com.kenshi.booksearchapp.data.model.SearchResponse
+import com.kenshi.booksearchapp.domain.BookSearchRepository
 import com.kenshi.booksearchapp.repository.BookSearchRepositoryImpl.PreferenceKeys.CACHE_DELETE_MODE
 import com.kenshi.booksearchapp.repository.BookSearchRepositoryImpl.PreferenceKeys.SORT_MODE
 import com.kenshi.booksearchapp.util.Constants.PAGING_SIZE
@@ -22,6 +23,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 
+//TODO singleton 키워드 왜 있는거지
 @Singleton
 class BookSearchRepositoryImpl @Inject constructor(
     private val db: BookSearchDatabase,

@@ -3,7 +3,7 @@ package com.kenshi.booksearchapp.data.repository
 import androidx.paging.PagingData
 import com.kenshi.booksearchapp.data.model.Book
 import com.kenshi.booksearchapp.data.model.SearchResponse
-import com.kenshi.booksearchapp.repository.BookSearchRepository
+import com.kenshi.booksearchapp.domain.BookSearchRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import retrofit2.Response

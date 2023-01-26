@@ -3,7 +3,7 @@ package com.kenshi.booksearchapp.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kenshi.booksearchapp.data.model.Book
-import com.kenshi.booksearchapp.repository.BookSearchRepository
+import com.kenshi.booksearchapp.domain.BookSearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
