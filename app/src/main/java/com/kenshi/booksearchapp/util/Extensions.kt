@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
-// for stateFlow
 fun <T> Fragment.collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
     viewLifecycleOwner.lifecycleScope.launch {
         repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -25,40 +24,13 @@ fun <T> Fragment.collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T) 
     }
 }
 
-// for sharedFlow one-shot
-//fun <T> Fragment.collectLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
-//    viewLifecycleOwner.lifecycleScope.launch {
-//        repeatOnLifecycle(Lifecycle.State.STARTED) {
-//            flow.collect(collect)
-//        }
-//    }
-//}
-
-//// for sharedFlow 음.. fragment 로 하면 안되는데 이렇게 하니까 되네
-//fun <T> ComponentActivity.collectLatestLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
-//    lifecycleScope.launch {
-//        repeatOnLifecycle(Lifecycle.State.STARTED) {
-//            flow.collectLatest(collect)
-//        }
-//    }
-//}
-//
-//// for sharedFlow 음.. fragment 로 하면 안되는데 이렇게 하니까 되네
-//fun <T> ComponentActivity.collectLifecycleFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
-//    lifecycleScope.launch {
-//        repeatOnLifecycle(Lifecycle.State.STARTED) {
-//            flow.collectLatest(collect)
-//        }
-//    }
-//}
-
 fun EditText.textChangesToFlow(): Flow<CharSequence?> {
     return callbackFlow {
         val listener = object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) = Unit
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
             override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
-                //offer(text) is deprecated
+                // offer(text) is deprecated
                 // 값 내보내기
                 trySend(text)
             }
@@ -77,9 +49,3 @@ fun LifecycleOwner.repeatOnStarted(block: suspend CoroutineScope.() -> Unit) {
         lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED, block)
     }
 }
-
-//fun Fragment.repeatOnStarted(block: suspend CoroutineScope.() -> Unit) {
-//    viewLifecycleOwner.lifecycleScope.launch {
-//        lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED, block)
-//    }
-//}

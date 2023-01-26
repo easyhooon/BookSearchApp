@@ -27,9 +27,9 @@ class FavoriteViewModel @Inject constructor(
 
     val favoriteBooks: StateFlow<PagingData<Book>> =
         bookSearchRepository.getFavoriteBooks()
-            //코루틴이 데이터 스트림을 캐시하고 공유가능하게 만들어줌
+            // 코루틴이 데이터 스트림을 캐시하고 공유 가능하게 만들어줌
             .cachedIn(viewModelScope)
-            //stateFlow 로 변환
+            // stateFlow 로 변환
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), PagingData.empty())
 
     fun saveBooks(book: Book) = viewModelScope.launch {
