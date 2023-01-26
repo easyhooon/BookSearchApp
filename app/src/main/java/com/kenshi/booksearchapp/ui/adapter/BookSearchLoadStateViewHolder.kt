@@ -3,6 +3,7 @@ package com.kenshi.booksearchapp.ui.adapter
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
+import com.kenshi.booksearchapp.R
 import com.kenshi.booksearchapp.databinding.ItemLoadStateBinding
 
 class BookSearchLoadStateViewHolder(
@@ -18,7 +19,7 @@ class BookSearchLoadStateViewHolder(
 
     fun bind(loadState: LoadState) = with(binding) {
         if (loadState is LoadState.Error) {
-            tvError.text = "Error occurred"
+            tvError.text = itemView.context.getString(R.string.error_occurred)
 
             progressBar.isVisible = loadState is LoadState.Loading
             btnRetry.isVisible = loadState is LoadState.Error
