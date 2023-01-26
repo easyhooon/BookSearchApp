@@ -21,18 +21,18 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment_favorite) {
 
-    //private lateinit var bookSearchViewModel: BookSearchViewModel
-    //private val bookSearchViewModel by activityViewModels<BookSearchViewModel>()
+    // private lateinit var bookSearchViewModel: BookSearchViewModel
+    // private val bookSearchViewModel by activityViewModels<BookSearchViewModel>()
     private val favoriteViewModel by viewModels<FavoriteViewModel>()
 
     override fun getViewBinding() = FragmentFavoriteBinding.inflate(layoutInflater)
 
-    //private lateinit var bookSearchAdapter: BookSearchAdapter
+    // private lateinit var bookSearchAdapter: BookSearchAdapter
     private lateinit var bookSearchAdapter: BookSearchPagingAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //bookSearchViewModel = (activity as MainActivity).bookSearchViewModel
+        // bookSearchViewModel = (activity as MainActivity).bookSearchViewModel
 
         setupRecyclerView()
         setupTouchHelper(view)
@@ -47,8 +47,8 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
 //            }
 //        }
 
-        //favoriteBooks 를 stateFlow 로 변환하여 flow 동작을 favorite Fragment 의 생명주기와 동기화
-        //stateFlow 를 구독
+        // favoriteBooks 를 stateFlow 로 변환하여 flow 동작을 favorite Fragment 의 생명주기와 동기화
+        // stateFlow 를 구독
 //        viewLifecycleOwner.lifecycleScope.launch {
 //            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
 //                bookSearchViewModel.favoriteBooks.collectLatest {
@@ -57,20 +57,20 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
 //            }
 //        }
 
-        //확장함수로 변경
+        // 확장 함수로 변경
 //        collectLatestLifecycleFlow(bookSearchViewModel.favoriteBooks) {
 //            bookSearchAdapter.submitList(it)
 //        }
 
-        //pagingData 는 시간에 따라 변하기 때문에 collect 가 아닌 collectLatest 로 구독 처리
+        // pagingData 는 시간에 따라 변하기 때문에 collect 가 아닌 collectLatest 로 구독 처리
         // 기존의 paging 값을 cancel -> 새 값을 구독하도록
-        collectLatestLifecycleFlow(favoriteViewModel.favoritePagingBooks) {
+        collectLatestLifecycleFlow(favoriteViewModel.favoriteBooks) {
             bookSearchAdapter.submitData(it)
         }
     }
 
     private fun setupRecyclerView() {
-        //bookSearchAdapter = BookSearchAdapter()
+        // bookSearchAdapter = BookSearchAdapter()
         bookSearchAdapter = BookSearchPagingAdapter()
         binding.rvFavoriteBooks.apply {
             setHasFixedSize(true)
@@ -82,12 +82,12 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
         }
 
         bookSearchAdapter.setOnItemClickListener {
-            val action = SearchFragmentDirections.actionFragmentSearchToFragmentBook(it)
+            val action = FavoriteFragmentDirections.actionFragmentFavoriteToFragmentBook(it)
             findNavController().navigate(action)
         }
     }
 
-    //왼쪽으로 스와이프시 아이템 삭제
+    // 왼쪽으로 스와이프시 아이템 삭제
     private fun setupTouchHelper(view: View) {
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             0, ItemTouchHelper.LEFT
@@ -104,9 +104,9 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
                 val position = viewHolder.bindingAdapterPosition
 //                val book = bookSearchAdapter.currentList[position]
 //                bookSearchViewModel.deleteBooks(book)
-//                //undo 시 recyclerview 의 표시 위치를 유지하고 싶으면
-//                //book class 의 primary key 를 isbn 대신 자동 증가하는 정수값을 추가 해서 저장해주면 됨
-//                //그러면 item 이 지워졌다가 다시 생성되어도 recyclerview 가 정수 오름차순으로 항목값을 표시해주게 됨
+//                // undo 시 recyclerview 의 표시 위치를 유지 하고 싶으면
+//                // book class 의 primary key 를 isbn 대신 자동 증가 하는 정수값을 추가 해서 저장 해주면 됨
+//                // 그러면 item 이 지워 졌다가 다시 생성 되어도 recyclerview 가 정수 오름차순으로 항목 값을 표시 해주게 됨
 //                Snackbar.make(view, "Book has deleted", Snackbar.LENGTH_SHORT).apply {
 //                    setAction("Undo") {
 //                        bookSearchViewModel.saveBooks(book)
@@ -116,9 +116,9 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
                 val pagedBook = bookSearchAdapter.peek(position)
                 pagedBook?.let { book ->
                     favoriteViewModel.deleteBooks(book)
-                    //undo 시 recyclerview 의 표시 위치를 유지하고 싶으면
-                    //book class 의 primary key 를 isbn 대신 자동 증가하는 정수값을 추가 해서 저장해주면 됨
-                    //그러면 item 이 지워졌다가 다시 생성되어도 recyclerview 가 정수 오름차순으로 항목값을 표시해주게 됨
+                    // undo 시 recyclerview 의 표시 위치를 유지 하고 싶으면
+                    // book class 의 primary key 를 isbn 대신 자동 증가하는 정수값을 추가 해서 저장 해주면 됨
+                    // 그러면 item 이 지워 졌다가 다시 생성 되어도 recyclerview 가 정수 오름차순으로 항목 값을 표시 해주게 됨
                     Snackbar.make(view, "Book has deleted", Snackbar.LENGTH_SHORT).apply {
                         setAction("Undo") {
                             favoriteViewModel.saveBooks(book)
