@@ -102,7 +102,7 @@ class SearchBooksFragment :
         }
     }
 
-    // Flow Debounce 를 사용하는 방법으로 변경 완료
+    // Flow Debounce 를 사용 하는 방법으로 변경 완료
     private fun searchBooks() = with(binding) {
         var startTime = System.currentTimeMillis()
         var endTime: Long

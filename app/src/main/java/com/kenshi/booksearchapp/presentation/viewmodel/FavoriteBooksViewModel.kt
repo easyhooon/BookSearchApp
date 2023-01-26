@@ -40,11 +40,11 @@ class FavoriteBooksViewModel @Inject constructor(
             // stateFlow 로 변환
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), PagingData.empty())
 
-    fun saveBooks(bookItem: BookItem) = viewModelScope.launch {
+    fun saveBook(bookItem: BookItem) = viewModelScope.launch {
         insertBookUseCase(bookItem.toDomain())
     }
 
-    fun deleteBooks(bookItem: BookItem) = viewModelScope.launch {
+    fun deleteBook(bookItem: BookItem) = viewModelScope.launch {
         deleteBookUseCase(bookItem.toDomain())
     }
 }

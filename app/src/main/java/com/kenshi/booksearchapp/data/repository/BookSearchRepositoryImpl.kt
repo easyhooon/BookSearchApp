@@ -23,7 +23,7 @@ class BookSearchRepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteBook(bookEntity: BookEntity) {
-        bookSearchLocalDataSource.insertBook(bookEntity)
+        bookSearchLocalDataSource.deleteBook(bookEntity)
     }
 
     override fun getFavoriteBooks(): Flow<PagingData<BookEntity>> {

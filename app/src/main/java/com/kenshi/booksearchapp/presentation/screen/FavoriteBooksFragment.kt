@@ -81,13 +81,13 @@ class FavoriteBooksFragment :
 
                 val pagedBook = bookSearchAdapter.peek(position)
                 pagedBook?.let { book ->
-                    favoriteBooksViewModel.deleteBooks(book)
+                    favoriteBooksViewModel.deleteBook(book)
                     // undo 시 recyclerview 의 표시 위치를 유지 하고 싶으면
                     // book class 의 primary key 를 isbn 대신 자동 증가하는 정수값을 추가 해서 저장 해주면 됨
                     // 그러면 item 이 지워 졌다가 다시 생성 되어도 recyclerview 가 정수 오름차순으로 항목 값을 표시 해주게 됨
                     Snackbar.make(view, "Book has deleted", Snackbar.LENGTH_SHORT).apply {
                         setAction("Undo") {
-                            favoriteBooksViewModel.saveBooks(book)
+                            favoriteBooksViewModel.saveBook(book)
                         }
                     }.show()
                 }
