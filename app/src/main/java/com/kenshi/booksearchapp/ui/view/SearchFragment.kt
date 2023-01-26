@@ -3,23 +3,22 @@ package com.kenshi.booksearchapp.ui.view
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kenshi.booksearchapp.R
 import com.kenshi.booksearchapp.common.collectLatestLifecycleFlow
 import com.kenshi.booksearchapp.common.repeatOnStarted
 import com.kenshi.booksearchapp.common.textChangesToFlow
 import com.kenshi.booksearchapp.databinding.FragmentSearchBinding
 import com.kenshi.booksearchapp.ui.adapter.BookSearchLoadStateAdapter
 import com.kenshi.booksearchapp.ui.adapter.BookSearchPagingAdapter
+import com.kenshi.booksearchapp.ui.base.BaseFragment
 import com.kenshi.booksearchapp.ui.viewmodel.SearchViewModel
 import com.kenshi.booksearchapp.util.Constants.SEARCH_BOOKS_TIME_DELAY
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,25 +30,16 @@ import kotlinx.coroutines.flow.onEach
 
 
 @AndroidEntryPoint
-class SearchFragment : Fragment() {
-    private var _binding: FragmentSearchBinding? = null
-    private val binding get() = _binding!!
+class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
 
-    //    private lateinit var bookSearchViewModel: BookSearchViewModel
+    //private lateinit var bookSearchViewModel: BookSearchViewModel
     //private val bookSearchViewModel by activityViewModels<BookSearchViewModel>()
     private val searchViewModel by viewModels<SearchViewModel>()
 
+    override fun getViewBinding() = FragmentSearchBinding.inflate(layoutInflater)
+
     //private lateinit var bookSearchAdapter: BookSearchAdapter
     private lateinit var bookSearchAdapter: BookSearchPagingAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -204,11 +194,5 @@ class SearchFragment : Fragment() {
 //                bookSearchAdapter.retry()
 //            }
         }
-    }
-
-
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
     }
 }

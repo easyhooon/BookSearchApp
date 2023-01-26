@@ -2,22 +2,19 @@ package com.kenshi.booksearchapp.ui.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.webkit.WebViewClient
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
+import com.kenshi.booksearchapp.R
 import com.kenshi.booksearchapp.databinding.FragmentBookBinding
+import com.kenshi.booksearchapp.ui.base.BaseFragment
 import com.kenshi.booksearchapp.ui.viewmodel.BookViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BookFragment : Fragment() {
-    private var _binding: FragmentBookBinding? = null
-    private val binding get() = _binding!!
+class BookFragment : BaseFragment<FragmentBookBinding>(R.layout.fragment_book) {
 
     private val args by navArgs<BookFragmentArgs>()
 
@@ -25,14 +22,7 @@ class BookFragment : Fragment() {
     //private val bookSearchViewModel by activityViewModels<BookSearchViewModel>()
     private val bookViewModel by viewModels<BookViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentBookBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun getViewBinding() = FragmentBookBinding.inflate(layoutInflater)
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,10 +52,5 @@ class BookFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         binding.webview.onResume()
-    }
-
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
     }
 }

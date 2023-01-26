@@ -41,9 +41,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 ////        bookSearchViewModel = ViewModelProvider(this, factory)[BookSearchViewModel::class.java]
 //    }
 
-    override fun getViewBinding(): ActivityMainBinding {
-        return ActivityMainBinding.inflate(layoutInflater)
-    }
+    override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
     override fun preload() {
         installSplashScreen()
@@ -65,7 +63,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
-
 
         // Top 레벨의 destination 을 하나씩 지정해줌
         appBarConfiguration = AppBarConfiguration(

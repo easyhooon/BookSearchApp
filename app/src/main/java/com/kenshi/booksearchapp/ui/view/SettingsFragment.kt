@@ -2,14 +2,12 @@ package com.kenshi.booksearchapp.ui.view
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.kenshi.booksearchapp.R
 import com.kenshi.booksearchapp.databinding.FragmentSettingsBinding
+import com.kenshi.booksearchapp.ui.base.BaseFragment
 import com.kenshi.booksearchapp.ui.viewmodel.SettingsViewModel
 import com.kenshi.booksearchapp.util.Sort
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,23 +15,13 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class SettingsFragment : Fragment() {
-    private var _binding: FragmentSettingsBinding? = null
-    private val binding get() = _binding!!
+class SettingsFragment : BaseFragment<FragmentSettingsBinding>(R.layout.fragment_settings) {
 
-    //    private lateinit var bookSearchViewModel: BookSearchViewModel
+    //private lateinit var bookSearchViewModel: BookSearchViewModel
     //private val bookSearchViewModel by activityViewModels<BookSearchViewModel>()
     private val settingsViewModel by viewModels<SettingsViewModel>()
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun getViewBinding() = FragmentSettingsBinding.inflate(layoutInflater)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -92,11 +80,5 @@ class SettingsFragment : Fragment() {
                 tvWorkStatus.text = workInfo[0].state.toString()
             }
         }
-    }
-
-
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
     }
 }

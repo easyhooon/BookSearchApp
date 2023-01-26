@@ -5,9 +5,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseActivity<VB: ViewBinding>(
-    @LayoutRes val layoutId: Int
-) : AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding>(@LayoutRes val layoutId: Int) : AppCompatActivity() {
 
     protected lateinit var binding: VB
 
