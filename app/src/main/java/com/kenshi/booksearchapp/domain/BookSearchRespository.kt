@@ -6,22 +6,16 @@ import kotlinx.coroutines.flow.Flow
 
 interface BookSearchRepository {
 
-//    suspend fun searchBooks(
-//        query: String,
-//        sort: String,
-//        page: Int,
-//        size: Int,
-//    ): Response<SearchResponse>
+    fun searchBooks(query: String, sort: String): Flow<PagingData<BookEntity>>
 
-    // Room
     suspend fun insertBook(bookEntity: BookEntity)
 
     suspend fun deleteBook(bookEntity: BookEntity)
 
-    // fun getFavoriteBooks(): LiveData<List<Book>>
     fun getFavoriteBooksForTest(): Flow<List<BookEntity>>
 
-    // DataStore
+    fun getFavoriteBooks(): Flow<PagingData<BookEntity>>
+
     suspend fun saveSortMode(mode: String)
 
     suspend fun getSortMode(): Flow<String>
@@ -29,9 +23,4 @@ interface BookSearchRepository {
     suspend fun saveCacheDeleteMode(mode: Boolean)
 
     suspend fun getCacheDeleteMode(): Flow<Boolean>
-
-    // Paging
-    fun getFavoriteBooks(): Flow<PagingData<BookEntity>>
-
-    fun searchBooks(query: String, sort: String): Flow<PagingData<BookEntity>>
 }

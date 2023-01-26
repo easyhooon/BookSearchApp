@@ -14,15 +14,6 @@ class BookSearchRepositoryImpl @Inject constructor(
     private val bookSearchLocalDataSource: BookSearchLocalDataSource
 ) : BookSearchRepository {
 
-//    override suspend fun searchBooks(
-//        query: String,
-//        sort: String,
-//        page: Int,
-//        size: Int,
-//    ): Response<SearchResponse> {
-//        return bookSearchRemoteDataSource.searchBooks(query, sort, page, size)
-//    }
-
     override fun searchBooks(query: String, sort: String): Flow<PagingData<BookEntity>> {
         return bookSearchRemoteDataSource.searchBooks(query, sort)
     }
@@ -34,10 +25,6 @@ class BookSearchRepositoryImpl @Inject constructor(
     override suspend fun deleteBook(bookEntity: BookEntity) {
         bookSearchLocalDataSource.insertBook(bookEntity)
     }
-
-//    override fun getFavoriteBooks(): LiveData<List<Book>> {
-//        return bookSearchLocalDataSource.bookSearchDao().getFavoriteBooks()
-//    }
 
     override fun getFavoriteBooks(): Flow<PagingData<BookEntity>> {
         return bookSearchLocalDataSource.getFavoriteBooks()

@@ -29,15 +29,6 @@ class BookSearchLocalDataSource @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) {
 
-//    override suspend fun searchBooks(
-//        query: String,
-//        sort: String,
-//        page: Int,
-//        size: Int,
-//    ): Response<SearchResponse> {
-//        return api.searchBooks(query, sort, page, size)
-//    }
-
     suspend fun insertBook(bookEntity: BookEntity) {
         bookSearchDatabase.bookSearchDao().insertBook(bookEntity.toModel())
     }
@@ -46,10 +37,6 @@ class BookSearchLocalDataSource @Inject constructor(
         bookSearchDatabase.bookSearchDao().deleteBook(bookEntity.toModel())
     }
 
-//    override fun getFavoriteBooks(): LiveData<List<Book>> {
-//        return db.bookSearchDao().getFavoriteBooks()
-//    }
-
     fun getFavoriteBooksForTest(): Flow<List<BookEntity>> {
         return bookSearchDatabase.bookSearchDao().getFavoriteBooks().map { list ->
             list.map { book ->
@@ -57,7 +44,6 @@ class BookSearchLocalDataSource @Inject constructor(
             }
         }
     }
-
 
     private object PreferenceKeys {
         // key 로 string 을 사용하던 spf 와 다르게 type-safe 를 위해 preferencesKey 를 사용
@@ -121,7 +107,7 @@ class BookSearchLocalDataSource @Inject constructor(
         }
 
         return Pager(
-            // pager 를 구현하기 위해서는
+            // pager 를 구현하려면
             // pagingConfig 를 통해 parameter 를 전달 해줘야함
             config = PagingConfig(
                 // 어떤 기기로 동작 시키든 뷰홀더에 표시할 데이터가 모자르지 않을 정도의 값으로 설정

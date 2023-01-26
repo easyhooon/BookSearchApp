@@ -15,10 +15,6 @@ interface BookSearchDao {
     @Delete
     suspend fun deleteBook(book: Book)
 
-    // query 를 제외한 cud 작업은 시간이 오래 걸리는 작업이라 suspend 키워드
-//    @Query("SELECT * FROM books")
-//    fun getFavoriteBooks(): LiveData<List<Book>>
-
     @Query("SELECT * FROM books")
     fun getFavoriteBooks(): Flow<List<Book>>
 
