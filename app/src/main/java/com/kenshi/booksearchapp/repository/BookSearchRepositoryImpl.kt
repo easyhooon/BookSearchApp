@@ -1,14 +1,17 @@
 package com.kenshi.booksearchapp.repository
 
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.*
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.kenshi.booksearchapp.data.api.BookSearchApi
 import com.kenshi.booksearchapp.data.db.BookSearchDatabase
 import com.kenshi.booksearchapp.data.model.Book
-import com.kenshi.booksearchapp.data.model.SearchResponse
 import com.kenshi.booksearchapp.domain.BookSearchRepository
 import com.kenshi.booksearchapp.repository.BookSearchRepositoryImpl.PreferenceKeys.CACHE_DELETE_MODE
 import com.kenshi.booksearchapp.repository.BookSearchRepositoryImpl.PreferenceKeys.SORT_MODE
@@ -17,7 +20,6 @@ import com.kenshi.booksearchapp.util.Sort
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
-import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -30,20 +32,21 @@ class BookSearchRepositoryImpl @Inject constructor(
     private val dataStore: DataStore<Preferences>,
     private val api: BookSearchApi,
 ) : BookSearchRepository {
-    override suspend fun searchBooks(
-        query: String,
-        sort: String,
-        page: Int,
-        size: Int,
-    ): Response<SearchResponse> {
-        return api.searchBooks(query, sort, page, size)
-    }
 
-    override suspend fun insertBooks(book: Book) {
+//    override suspend fun searchBooks(
+//        query: String,
+//        sort: String,
+//        page: Int,
+//        size: Int,
+//    ): Response<SearchResponse> {
+//        return api.searchBooks(query, sort, page, size)
+//    }
+
+    override suspend fun insertBook(book: Book) {
         db.bookSearchDao().insertBook(book)
     }
 
-    override suspend fun deleteBooks(book: Book) {
+    override suspend fun deleteBook(book: Book) {
         db.bookSearchDao().deleteBook(book)
     }
 
@@ -51,7 +54,7 @@ class BookSearchRepositoryImpl @Inject constructor(
 //        return db.bookSearchDao().getFavoriteBooks()
 //    }
 
-    override fun getFavoriteBooks(): Flow<List<Book>> {
+    override fun getFavoriteBooksForTest(): Flow<List<Book>> {
         return db.bookSearchDao().getFavoriteBooks()
     }
 
@@ -112,7 +115,7 @@ class BookSearchRepositoryImpl @Inject constructor(
             }
     }
 
-    override fun getFavoritePagingBooks(): Flow<PagingData<Book>> {
+    override fun getFavoriteBooks(): Flow<PagingData<Book>> {
         val pagingSourceFactory = { db.bookSearchDao().getFavoritePagingBooks() }
 
         return Pager(
@@ -134,7 +137,7 @@ class BookSearchRepositoryImpl @Inject constructor(
         ).flow
     }
 
-    override fun searchBooksPaging(query: String, sort: String): Flow<PagingData<Book>> {
+    override fun searchBooks(query: String, sort: String): Flow<PagingData<Book>> {
         val pagingSourceFactory = { BookSearchPagingSource(api, query, sort) }
 
         return Pager(

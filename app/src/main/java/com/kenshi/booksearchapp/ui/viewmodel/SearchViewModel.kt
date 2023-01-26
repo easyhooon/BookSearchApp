@@ -24,13 +24,12 @@ class SearchViewModel @Inject constructor(
 
     // Paging
     private val _searchPagingResult = MutableStateFlow<PagingData<Book>>(PagingData.empty())
-
     //ui 에는 변경 불가능한 searchPagingResult 를 공개
     val searchPagingResult: StateFlow<PagingData<Book>> = _searchPagingResult.asStateFlow()
 
     fun searchBooksPaging(query: String) {
         viewModelScope.launch {
-            bookSearchRepository.searchBooksPaging(query, getSortMode())
+            bookSearchRepository.searchBooks(query, getSortMode())
                 .cachedIn(viewModelScope)
                 .collect {
                     _searchPagingResult.value = it

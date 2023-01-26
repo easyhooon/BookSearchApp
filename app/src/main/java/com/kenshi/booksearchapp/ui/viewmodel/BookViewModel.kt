@@ -16,12 +16,12 @@ class BookViewModel @Inject constructor(
 
     // Room
     fun saveBooks(book: Book) = viewModelScope.launch {
-        bookSearchRepository.insertBooks(book)
+        bookSearchRepository.insertBook(book)
     }
 
     // For test
     // repository 의 값을 반환 받는 변수
     // viewModel 기능을 체크하는데 repository 반환 값 그 자체에는 상관이 없기 때문에
     // repository fake double 을 사용
-    val favoriteBooks: Flow<List<Book>> = bookSearchRepository.getFavoriteBooks()
+    val favoriteBooks: Flow<List<Book>> = bookSearchRepository.getFavoriteBooksForTest()
 }
