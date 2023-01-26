@@ -115,6 +115,7 @@ class SearchFragment : Fragment() {
 
         }
 
+        //TODO 왜 repeatOnLifecycle 이 아니고 collectLatest 를 사용했는지 확인
         collectLatestLifecycleFlow(searchViewModel.searchPagingResult) {
             bookSearchAdapter.submitData(it)
         }

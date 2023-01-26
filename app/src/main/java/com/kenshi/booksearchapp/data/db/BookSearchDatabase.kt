@@ -10,14 +10,14 @@ import com.kenshi.booksearchapp.data.model.Book
     version = 1,
     exportSchema = false
 )
-//typeConverter 를 지정하면 room 에서 알아서 type convert 작업을 처리해준다.
+//typeConverter 를 지정 하면 room 에서 알아서 type convert 작업을 처리해준다.
 @TypeConverters(OrmConverter::class)
 abstract class BookSearchDatabase : RoomDatabase() {
 
     //dao 지정
     abstract fun bookSearchDao(): BookSearchDao
 
-    // Hilt 도입 이후 필요없어짐
+    // Hilt 도입 이후 필 요없어짐
     //singleton setting
 //    companion object {
 //        @Volatile
