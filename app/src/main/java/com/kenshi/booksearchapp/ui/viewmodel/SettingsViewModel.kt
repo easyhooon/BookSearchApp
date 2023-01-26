@@ -51,15 +51,15 @@ class SettingsViewModel @Inject constructor(
     // WorkManager
     fun setWork() {
         val constraints = Constraints.Builder()
-            //충전중일때만
+            // 충전 중 일때만
             .setRequiresCharging(true)
-            //배터리 잔량 충분
+            // 배터리 잔량 충분
             .setRequiresBatteryNotLow(true)
             .build()
 
         // 15분에 한번식 work
         val workRequest = PeriodicWorkRequestBuilder<CacheDeleteWorker>(15, TimeUnit.MINUTES)
-            //constraints 반영
+            // constraints 반영
             .setConstraints(constraints)
             .build()
 
@@ -70,12 +70,12 @@ class SettingsViewModel @Inject constructor(
 
     fun deleteWork() = workManager.cancelUniqueWork(WORKER_KEY)
 
-    //현재 work 의 상태를 liveData type 으로 반환
+    // 현재 work 의 상태를 liveData type 으로 반환
     fun getWorkStatus(): LiveData<MutableList<WorkInfo>> =
         workManager.getWorkInfosForUniqueWorkLiveData(WORKER_KEY)
 
     companion object {
-        //WorkManager 작업의 tag 로 사용
+        // WorkManager 작업의 tag 로 사용
         private const val WORKER_KEY = "cache_worker"
     }
 }

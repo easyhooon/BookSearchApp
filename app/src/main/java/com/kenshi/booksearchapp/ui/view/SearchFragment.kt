@@ -32,21 +32,21 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
 
-    //private lateinit var bookSearchViewModel: BookSearchViewModel
-    //private val bookSearchViewModel by activityViewModels<BookSearchViewModel>()
+    // private lateinit var bookSearchViewModel: BookSearchViewModel
+    // private val bookSearchViewModel by activityViewModels<BookSearchViewModel>()
     private val searchViewModel by viewModels<SearchViewModel>()
 
     override fun getViewBinding() = FragmentSearchBinding.inflate(layoutInflater)
 
-    //private lateinit var bookSearchAdapter: BookSearchAdapter
+    // private lateinit var bookSearchAdapter: BookSearchAdapter
     private lateinit var bookSearchAdapter: BookSearchPagingAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //bookSearchViewModel = (activity as MainActivity).bookSearchViewModel
+        // bookSearchViewModel = (activity as MainActivity).bookSearchViewModel
 
         setupRecyclerView()
-        //searchBooks()
+        // searchBooks()
         setupLoadState()
         initObservers()
     }
@@ -105,14 +105,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
         }
 
-        //TODO 왜 repeatOnLifecycle 이 아니고 collectLatest 를 사용했는지 확인
         collectLatestLifecycleFlow(searchViewModel.searchPagingResult) {
             bookSearchAdapter.submitData(it)
         }
     }
 
     private fun setupRecyclerView() {
-        //bookSearchAdapter = BookSearchAdapter()
+        // bookSearchAdapter = BookSearchAdapter()
         bookSearchAdapter = BookSearchPagingAdapter()
         binding.rvSearchResult.apply {
             setHasFixedSize(true)
@@ -120,7 +119,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(requireContext(),
                 DividerItemDecoration.VERTICAL))
-            //adapter = bookSearchAdapter
+            // adapter = bookSearchAdapter
 
             // pagingDataAdapter 와 loadStateAdapter 연결
             // recyclerView 의 footer 로 error 상황과 retry button 이 나타남
@@ -143,14 +142,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         etSearch.text =
             Editable.Factory.getInstance().newEditable(searchViewModel.query)
 
-        // 이런식으로 구현자체는 가능하다.
+        // 이런 식으로 구현 가능 하다.
         etSearch.addTextChangedListener { text: Editable? ->
             endTime = System.currentTimeMillis()
             if (endTime - startTime >= SEARCH_BOOKS_TIME_DELAY) {
                 text?.let {
                     val query = it.toString().trim()
                     if (query.isNotEmpty()) {
-                        //bookSearchViewModel.searchBooks(query)
+                        // bookSearchViewModel.searchBooks(query)
                         searchViewModel.searchBooksPaging(query)
                         searchViewModel.query = query
                     }
@@ -161,11 +160,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     }
 
     private fun setupLoadState() = with(binding) {
-        //combinedLoadStates -> PagingSource 와 RemoteMediator 두가지 source 의 loading 상태를 가지고 있음
-        //remoteMediator 는 사용하지 않기 때문에 source 의 값만 대응하면 됨
-        //prepend : loading 시작시 만들어짐
-        //append : loading 종료시 만들어짐
-        //refresh : loading 값을 갱신할때 만들어짐
+        // combinedLoadStates -> PagingSource 와 RemoteMediator 두가지 source 의 loading 상태를 가지고 있음
+        // remoteMediator 는 사용하지 않기 때문에 source 의 값만 대응하면 됨
+        // prepend : loading 시작시 만들어짐
+        // append : loading 종료시 만들어짐
+        // refresh : loading 값을 갱신할때 만들어짐
         bookSearchAdapter.addLoadStateListener { combinedLoadStates ->
             val loadState = combinedLoadStates.source
             // list가 비어있는지 판정하는 방법
@@ -178,7 +177,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
             progressBar.isVisible = loadState.refresh is LoadState.Loading
 
-            //loading State 는 LoadStateAdapter 에서 관리해주기 때문에 주석처리
+            // loading State 는 LoadStateAdapter 에서 관리해주기 때문에 주석처리
 //            btnRetry.isVisible = loadState.refresh is LoadState.Error
 //                    || loadState.append is LoadState.Error
 //                    || loadState.prepend is LoadState.Error

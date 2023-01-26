@@ -17,5 +17,6 @@
     <string name="status">Status</string>
     <string name="no_works">No works</string>
     <string name="search_">Search..</string>
+    <string name="error_occurred">Error occurred</string>
 
 </resources>

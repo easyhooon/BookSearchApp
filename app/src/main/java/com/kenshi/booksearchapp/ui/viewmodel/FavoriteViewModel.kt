@@ -25,15 +25,13 @@ class FavoriteViewModel @Inject constructor(
 //            listOf()
 //        )
 
-    // Paging
-    val favoritePagingBooks: StateFlow<PagingData<Book>> =
+    val favoriteBooks: StateFlow<PagingData<Book>> =
         bookSearchRepository.getFavoriteBooks()
             //코루틴이 데이터 스트림을 캐시하고 공유가능하게 만들어줌
             .cachedIn(viewModelScope)
             //stateFlow 로 변환
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), PagingData.empty())
 
-    // Room
     fun saveBooks(book: Book) = viewModelScope.launch {
         bookSearchRepository.insertBook(book)
     }

@@ -21,7 +21,7 @@ class BookSearchLoadStateAdapter(
     }
 
     override fun onBindViewHolder(holder: BookSearchLoadStateViewHolder, loadState: LoadState) {
-        //binding 시 loadState 를 전달
+        // binding 시 loadState 를 전달
         holder.bind(loadState)
     }
 }

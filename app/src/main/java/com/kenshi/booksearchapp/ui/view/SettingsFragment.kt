@@ -17,15 +17,15 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(R.layout.fragment_settings) {
 
-    //private lateinit var bookSearchViewModel: BookSearchViewModel
-    //private val bookSearchViewModel by activityViewModels<BookSearchViewModel>()
+    // private lateinit var bookSearchViewModel: BookSearchViewModel
+    // private val bookSearchViewModel by activityViewModels<BookSearchViewModel>()
     private val settingsViewModel by viewModels<SettingsViewModel>()
 
     override fun getViewBinding() = FragmentSettingsBinding.inflate(layoutInflater)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //bookSearchViewModel = (activity as MainActivity).bookSearchViewModel
+        // bookSearchViewModel = (activity as MainActivity).bookSearchViewModel
 
         saveSettings()
         loadSettings()
@@ -64,7 +64,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(R.layout.fragment
 
         lifecycleScope.launch {
             val mode = settingsViewModel.getCacheDeleteMode()
-            //cache 버튼의 활성화 여부 반영
+            // cache 버튼의 활성화 여부 반영
             swCacheDelete.isChecked = mode
         }
     }

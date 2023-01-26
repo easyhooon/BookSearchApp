@@ -58,7 +58,6 @@ class BookSearchRepositoryImpl @Inject constructor(
         return db.bookSearchDao().getFavoriteBooks()
     }
 
-    // DataStore
     private object PreferenceKeys {
         // key 로 string 을 사용하던 spf 와 다르게 type-safe 를 위해 preferencesKey 를 사용
         // 저장할 type 이 string 이기때문에 stringPreferencesKey
@@ -66,7 +65,7 @@ class BookSearchRepositoryImpl @Inject constructor(
         val CACHE_DELETE_MODE = booleanPreferencesKey("cache_delete_mode")
     }
 
-    // 저장 작업은 coroutine 블럭에서 이루어짐
+    // 저장 작업은 coroutine block 내에서 이루어짐
     override suspend fun saveSortMode(mode: String) {
         dataStore.edit { prefs ->
             prefs[SORT_MODE] = mode
@@ -122,16 +121,16 @@ class BookSearchRepositoryImpl @Inject constructor(
             // pager 를 구현하기 위해서는
             // pagingConfig 를 통해 parameter 를 전달 해줘야함
             config = PagingConfig(
-                //어떤 기기로 동작 시키든 뷰홀더에 표시할 데이터가 모자르지 않을 정도의 값으로 설정
+                // 어떤 기기로 동작 시키든 뷰홀더에 표시할 데이터가 모자르지 않을 정도의 값으로 설정
                 pageSize = PAGING_SIZE,
-                //true -> repository 의 전체 데이터 사이즈를 받아와서 recyclerview 의 placeholder 를 미리 만들어놓음
-                //화면에 표시되지 않는 항목은 null로 표시
-                //필요할때 필요한 만큼만 로딩하려면 false
+                // true -> repository 의 전체 데이터 사이즈를 받아와서 recyclerview 의 placeholder 를 미리 만들어놓음
+                // 화면에 표시되지 않는 항목은 null로 표시
+                // 필요할 때 필요한 만큼만 로딩 하려면 false
                 enablePlaceholders = false,
-                //페이저가 메모리에 가지고 있을 수 있는 최대 개수, 페이지 사이즈의 2~3배 정도
+                // 페이저가 메모리에 가지고 있을 수 있는 최대 개수, 페이지 사이즈의 2~3배 정도
                 maxSize = PAGING_SIZE * 3
             ),
-            //api 호출 결과를 팩토리에 전달
+            // api 호출 결과를 팩토리에 전달
             pagingSourceFactory = pagingSourceFactory
             // 결과를 flow 로 변환
         ).flow
@@ -144,16 +143,16 @@ class BookSearchRepositoryImpl @Inject constructor(
             // pager 를 구현하기 위해서는
             // pagingConfig 를 통해 parameter 를 전달 해줘야함
             config = PagingConfig(
-                //어떤 기기로 동작 시키든 뷰홀더에 표시할 데이터가 모자르지 않을 정도의 값으로 설정
+                // 어떤 기기로 동작 시키든 뷰홀더에 표시할 데이터가 모자르지 않을 정도의 값으로 설정
                 pageSize = PAGING_SIZE,
-                //true -> repository 의 전체 데이터 사이즈를 받아와서 recyclerview 의 placeholder 를 미리 만들어놓음
-                //화면에 표시되지 않는 항목은 null로 표시
-                //필요할때 필요한 만큼만 로딩하려면 false
+                // true -> repository 의 전체 데이터 사이즈를 받아와서 recyclerview 의 placeholder 를 미리 만들어놓음
+                // 화면에 표시되지 않는 항목은 null로 표시
+                // 필요할때 필요한 만큼만 로딩하려면 false
                 enablePlaceholders = false,
-                //페이저가 메모리에 가지고 있을 수 있는 최대 개수, 페이지 사이즈의 2~3배 정도
+                // 페이저가 메모리에 가지고 있을 수 있는 최대 개수, 페이지 사이즈의 2~3배 정도
                 maxSize = PAGING_SIZE * 3
             ),
-            //api 호출 결과를 팩토리에 전달
+            // api 호출 결과를 팩토리에 전달
             pagingSourceFactory = pagingSourceFactory
             // 결과를 flow 로 변환
         ).flow

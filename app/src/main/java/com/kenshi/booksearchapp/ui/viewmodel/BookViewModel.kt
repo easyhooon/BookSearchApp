@@ -14,7 +14,6 @@ class BookViewModel @Inject constructor(
     private val bookSearchRepository: BookSearchRepository,
 ) : ViewModel() {
 
-    // Room
     fun saveBooks(book: Book) = viewModelScope.launch {
         bookSearchRepository.insertBook(book)
     }

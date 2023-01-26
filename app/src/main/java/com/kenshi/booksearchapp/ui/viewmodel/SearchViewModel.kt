@@ -22,9 +22,7 @@ class SearchViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    // Paging
     private val _searchPagingResult = MutableStateFlow<PagingData<Book>>(PagingData.empty())
-    //ui 에는 변경 불가능한 searchPagingResult 를 공개
     val searchPagingResult: StateFlow<PagingData<Book>> = _searchPagingResult.asStateFlow()
 
     fun searchBooksPaging(query: String) {
@@ -37,7 +35,6 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    //SaveState
     var query = String()
         set(value) {
             field = value
@@ -48,7 +45,6 @@ class SearchViewModel @Inject constructor(
         query = savedStateHandle.get<String>(SAVE_STATE_KEY) ?: ""
     }
 
-    // DataStore
     private suspend fun getSortMode() = withContext(viewModelScope.coroutineContext) {
         bookSearchRepository.getSortMode().first()
     }

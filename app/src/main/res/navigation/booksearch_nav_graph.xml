@@ -18,11 +18,13 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
+
     <fragment
         android:id="@+id/fragment_settings"
         android:name="com.kenshi.booksearchapp.ui.view.SettingsFragment"
         android:label="@string/settings"
         tools:layout="@layout/fragment_settings" />
+
     <fragment
         android:id="@+id/fragment_search"
         android:name="com.kenshi.booksearchapp.ui.view.SearchFragment"
@@ -36,6 +38,7 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
+
     <fragment
         android:id="@+id/fragment_book"
         android:name="com.kenshi.booksearchapp.ui.view.BookFragment"
@@ -45,4 +48,5 @@
             android:name="book"
             app:argType="com.kenshi.booksearchapp.data.model.Book" />
     </fragment>
+
 </navigation>

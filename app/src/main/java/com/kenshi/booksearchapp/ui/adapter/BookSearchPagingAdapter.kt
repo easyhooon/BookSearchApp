@@ -16,9 +16,9 @@ class BookSearchPagingAdapter : PagingDataAdapter<Book, BookSearchViewHolder>(Bo
     }
 
     override fun onBindViewHolder(holder: BookSearchViewHolder, position: Int) {
-        //nullable
+        // nullable
         val pagedBook = getItem(position)
-        //null 대응
+        // null 대응
         pagedBook?.let { book ->
             holder.bind(book)
             holder.itemView.setOnClickListener {

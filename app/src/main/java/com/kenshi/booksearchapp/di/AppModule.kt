@@ -54,7 +54,7 @@ object AppModule {
         return retrofit.create(BookSearchApi::class.java)
     }
 
-    // 객체 생성에 필요한 context 는 @ApplicationContext 를 주입받아 사용
+    // 객체 생성에 필요한 context 는 @ApplicationContext 를 주입 받아 사용
 
     // Room
     @Singleton

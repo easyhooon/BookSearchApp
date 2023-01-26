@@ -18,8 +18,8 @@ class BookFragment : BaseFragment<FragmentBookBinding>(R.layout.fragment_book) {
 
     private val args by navArgs<BookFragmentArgs>()
 
-    //private lateinit var bookSearchViewModel: BookSearchViewModel
-    //private val bookSearchViewModel by activityViewModels<BookSearchViewModel>()
+    // private lateinit var bookSearchViewModel: BookSearchViewModel
+    // private val bookSearchViewModel by activityViewModels<BookSearchViewModel>()
     private val bookViewModel by viewModels<BookViewModel>()
 
     override fun getViewBinding() = FragmentBookBinding.inflate(layoutInflater)
@@ -28,8 +28,8 @@ class BookFragment : BaseFragment<FragmentBookBinding>(R.layout.fragment_book) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //액티비티에서 뷰모델을 생성하던 작업을 이제 힐트가 해줌 필요 없어짐
-        //bookSearchViewModel = (activity as MainActivity).bookSearchViewModel
+        // 액티비티에서 뷰모델을 생성하던 작업을 이제 힐트가 해줌 필요 없어짐
+        // bookSearchViewModel = (activity as MainActivity).bookSearchViewModel
 
         val book = args.book
         binding.webview.apply {
