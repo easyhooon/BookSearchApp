@@ -1,4 +1,4 @@
-package com.kenshi.booksearchapp.repository
+package com.kenshi.booksearchapp.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -13,8 +13,8 @@ import com.kenshi.booksearchapp.data.api.BookSearchApi
 import com.kenshi.booksearchapp.data.db.BookSearchDatabase
 import com.kenshi.booksearchapp.data.model.Book
 import com.kenshi.booksearchapp.domain.BookSearchRepository
-import com.kenshi.booksearchapp.repository.BookSearchRepositoryImpl.PreferenceKeys.CACHE_DELETE_MODE
-import com.kenshi.booksearchapp.repository.BookSearchRepositoryImpl.PreferenceKeys.SORT_MODE
+import com.kenshi.booksearchapp.data.BookSearchRepositoryImpl.PreferenceKeys.CACHE_DELETE_MODE
+import com.kenshi.booksearchapp.data.BookSearchRepositoryImpl.PreferenceKeys.SORT_MODE
 import com.kenshi.booksearchapp.util.Constants.PAGING_SIZE
 import com.kenshi.booksearchapp.util.Sort
 import kotlinx.coroutines.flow.Flow

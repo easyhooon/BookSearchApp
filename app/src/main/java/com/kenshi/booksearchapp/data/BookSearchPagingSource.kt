@@ -1,4 +1,4 @@
-package com.kenshi.booksearchapp.repository
+package com.kenshi.booksearchapp.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
