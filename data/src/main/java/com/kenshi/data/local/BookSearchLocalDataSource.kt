@@ -55,7 +55,7 @@ class BookSearchLocalDataSource @Inject constructor(
         }
     }
 
-    suspend fun getSortMode(): Flow<String> {
+    fun getSortMode(): Flow<String> {
         // 파일에 접근하기 위해 data 메소드를 사용
         return dataStore.data
             .catch { exception ->

@@ -18,7 +18,7 @@ interface BookSearchRepository {
 
     suspend fun saveSortMode(mode: String)
 
-    suspend fun getSortMode(): Flow<String>
+    fun getSortMode(): Flow<String>
 
     suspend fun saveCacheDeleteMode(mode: Boolean)
 

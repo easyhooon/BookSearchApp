@@ -49,7 +49,7 @@ class BookSearchRepositoryImpl @Inject constructor(
         bookSearchLocalDataSource.saveSortMode(mode)
     }
 
-    override suspend fun getSortMode(): Flow<String> {
+    override fun getSortMode(): Flow<String> {
         return bookSearchLocalDataSource.getSortMode()
     }
 

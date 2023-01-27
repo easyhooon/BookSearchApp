@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetSortModeUseCase @Inject constructor(
     private val bookSearchRepository: BookSearchRepository
 ) {
-    suspend operator fun invoke(): Flow<String> {
+    operator fun invoke(): Flow<String> {
         return bookSearchRepository.getSortMode()
     }
 }
