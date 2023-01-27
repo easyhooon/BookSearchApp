@@ -1,11 +1,14 @@
 package com.kenshi.data.repository
 
 import androidx.paging.PagingData
+import androidx.paging.map
 import com.kenshi.booksearchapp.domain.BookSearchRepository
 import com.kenshi.data.local.BookSearchLocalDataSource
+import com.kenshi.data.mapper.toEntity
 import com.kenshi.data.remote.BookSearchRemoteDataSource
 import com.kenshi.domain.entity.BookEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 
@@ -15,7 +18,11 @@ class BookSearchRepositoryImpl @Inject constructor(
 ) : BookSearchRepository {
 
     override fun searchBooks(query: String, sort: String): Flow<PagingData<BookEntity>> {
-        return bookSearchRemoteDataSource.searchBooks(query, sort)
+        return bookSearchRemoteDataSource.searchBooks(query, sort).map { pagingData ->
+            pagingData.map { book ->
+                book.toEntity()
+            }
+        }
     }
 
     override suspend fun insertBook(bookEntity: BookEntity) {
@@ -27,7 +34,11 @@ class BookSearchRepositoryImpl @Inject constructor(
     }
 
     override fun getFavoriteBooks(): Flow<PagingData<BookEntity>> {
-        return bookSearchLocalDataSource.getFavoriteBooks()
+        return bookSearchLocalDataSource.getFavoriteBooks().map { pagingData ->
+            pagingData.map { book ->
+                book.toEntity()
+            }
+        }
     }
 
     override fun getFavoriteBooksForTest(): Flow<List<BookEntity>> {

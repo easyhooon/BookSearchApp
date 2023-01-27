@@ -30,8 +30,8 @@ class FavoriteBooksViewModel @Inject constructor(
 
     val favoriteBooks: StateFlow<PagingData<BookItem>> =
         getFavoriteBooksUseCase()
-            .map {list ->
-                list.map { bookEntity ->
+            .map { pagingData ->
+                pagingData.map { bookEntity ->
                     bookEntity.toItem()
                 }
             }

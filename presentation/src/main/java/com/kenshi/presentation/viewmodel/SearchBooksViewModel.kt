@@ -27,11 +27,12 @@ class SearchBooksViewModel @Inject constructor(
     val searchPagingResult: StateFlow<PagingData<BookItem>> = _searchPagingResult.asStateFlow()
 
     // 함수의 파라미터가 존재 하므로 변수의 형태로 변환 할 수 없음
+    // 변수에 전달을 안하는데 어떻게 실행되고 있는거지
     fun searchBooksPaging(query: String) {
         viewModelScope.launch {
             searchBooksUseCase(query, getSortMode())
-                .map { list ->
-                    list.map { bookEntity ->
+                .map { pagingData ->
+                    pagingData.map { bookEntity ->
                         bookEntity.toItem()
                     }
                 }

@@ -5,12 +5,12 @@ import androidx.datastore.preferences.core.*
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.map
-import com.kenshi.data.local.db.BookSearchDatabase
 import com.kenshi.data.local.BookSearchLocalDataSource.PreferenceKeys.CACHE_DELETE_MODE
 import com.kenshi.data.local.BookSearchLocalDataSource.PreferenceKeys.SORT_MODE
+import com.kenshi.data.local.db.BookSearchDatabase
 import com.kenshi.data.mapper.toEntity
 import com.kenshi.data.mapper.toModel
+import com.kenshi.data.model.Book
 import com.kenshi.data.utils.Constants
 import com.kenshi.data.utils.Sort
 import com.kenshi.domain.entity.BookEntity
@@ -97,7 +97,7 @@ class BookSearchLocalDataSource @Inject constructor(
             }
     }
 
-    fun getFavoriteBooks(): Flow<PagingData<BookEntity>> {
+    fun getFavoriteBooks(): Flow<PagingData<Book>> {
         val pagingSourceFactory = {
             bookSearchDatabase.bookSearchDao().getFavoritePagingBooks()
         }
@@ -118,10 +118,6 @@ class BookSearchLocalDataSource @Inject constructor(
             // api 호출 결과를 팩토리에 전달
             pagingSourceFactory = pagingSourceFactory
             // 결과를 flow 로 변환
-        ).flow.map { pagingData ->
-            pagingData.map { book ->
-                book.toEntity()
-            }
-        }
+        ).flow
     }
 }

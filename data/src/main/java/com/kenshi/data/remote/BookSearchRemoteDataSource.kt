@@ -3,20 +3,18 @@ package com.kenshi.data.remote
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.map
-import com.kenshi.data.remote.api.BookSearchApi
-import com.kenshi.data.mapper.toEntity
+import com.kenshi.data.model.Book
 import com.kenshi.data.paging.BookSearchPagingSource
+import com.kenshi.data.remote.api.BookSearchApi
 import com.kenshi.data.utils.Constants
-import com.kenshi.domain.entity.BookEntity
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class BookSearchRemoteDataSource @Inject constructor(
     private val bookSearchApi: BookSearchApi
 ) {
-    fun searchBooks(query: String, sort: String): Flow<PagingData<BookEntity>> {
+    // TODO favoriteBooks 는 이 과정을 거치지 않아도 되는건가? 그게 room 과 paging 이 호환성이 잘 되어있다는 의미인 것인가
+    fun searchBooks(query: String, sort: String): Flow<PagingData<Book>> {
         val pagingSourceFactory = { BookSearchPagingSource(bookSearchApi, query, sort) }
 
         return Pager(
@@ -35,10 +33,6 @@ class BookSearchRemoteDataSource @Inject constructor(
             // api 호출 결과를 팩토리에 전달
             pagingSourceFactory = pagingSourceFactory
             // 결과를 flow 로 변환
-        ).flow.map { pagingData ->
-            pagingData.map { book ->
-                book.toEntity()
-            }
-        }
+        ).flow
     }
 }

@@ -41,6 +41,7 @@ class SearchBooksFragment :
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        // searchBooks()
         setupLoadState()
         initObservers()
     }
@@ -107,8 +108,7 @@ class SearchBooksFragment :
         var startTime = System.currentTimeMillis()
         var endTime: Long
 
-        etSearch.text
-        Editable.Factory.getInstance().newEditable(searchBooksViewModel.query)
+        etSearch.text = Editable.Factory.getInstance().newEditable(searchBooksViewModel.query)
 
         // 이런 식으로 구현 가능 하다.
         etSearch.addTextChangedListener { text: Editable? ->
@@ -125,17 +125,35 @@ class SearchBooksFragment :
             }
             startTime = endTime
         }
+
+//            val editTextFlow = binding.etSearch.textChangesToFlow()
+//
+//            editTextFlow
+//                .debounce(SEARCH_BOOKS_TIME_DELAY)
+//                .filter {
+//                    it?.length!! > 0
+//                }
+//                .onEach { text ->
+//                    Log.d("editTextFlow", "$text")
+//
+//                    text?.let {
+//                        val query = it.toString().trim()
+//                        searchBooksViewModel.searchBooksPaging(query)
+//                        searchBooksViewModel.query = query
+//                    }
+//                }
+//                .launchIn(this)
     }
 
     private fun setupLoadState() = with(binding) {
         // combinedLoadStates -> PagingSource 와 RemoteMediator 두가지 source 의 loading 상태를 가지고 있음
-        // remoteMediator 는 사용하지 않기 때문에 source 의 값만 대응하면 됨
+        // remoteMediator 는 사용 하지 않기 때문에 source 의 값만 대응하면 됨
         // prepend : loading 시작시 만들어짐
         // append : loading 종료시 만들어짐
-        // refresh : loading 값을 갱신할때 만들어짐
+        // refresh : loading 값을 갱신할 때 만들어짐
         bookSearchAdapter.addLoadStateListener { combinedLoadStates ->
             val loadState = combinedLoadStates.source
-            // list가 비어있는지 판정하는 방법
+            // list가 비어 있는지 판정 하는 방법
             val isListEmpty = bookSearchAdapter.itemCount < 1
                     && loadState.refresh is LoadState.NotLoading
                     && loadState.append.endOfPaginationReached
@@ -145,7 +163,7 @@ class SearchBooksFragment :
 
             progressBar.isVisible = loadState.refresh is LoadState.Loading
 
-            // loading State 는 LoadStateAdapter 에서 관리해주기 때문에 주석처리
+            // loading State 는 LoadStateAdapter 에서 관리 해주기 때문에 주석 처리
 //            btnRetry.isVisible = loadState.refresh is LoadState.Error
 //                    || loadState.append is LoadState.Error
 //                    || loadState.prepend is LoadState.Error
