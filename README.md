@@ -27,16 +27,16 @@ data
 ├── ...
 ├── src
 │   ├── data
-│   │   ├── di // Dependency Injection Module
+│   │   ├── di // dependency injection module
 │   │   ├── local         
 │   │   │   ├── db        
-│   │   │   ├── local datasource    
+│   │   │   ├── datasource    
 │   │   ├── mapper
-│   │   ├── model // api response, data model 
-│   │   ├── paging // paging source
+│   │   ├── model // API response, data model 
+│   │   ├── paging // pagingsource
 │   │   ├── remote
-│   │   │   ├── api // API interface 정의       
-│   │   │   ├── remote data source
+│   │   │   ├── api // API interface        
+│   │   │   ├── datasource
 │   │   ├── repository
 domain                                       
 ├── ...                                     
@@ -50,12 +50,12 @@ presentation
 ├── src                                         
 │   ├── presentation                                  
 │   │   ├── adapter          
-│   │   ├── base // Activity, Fragment
+│   │   ├── base 
 │   │   ├── item // presentation model                
 │   │   ├── mapper
-│   │   ├── screen
+│   │   ├── screen // activity, fragment
 │   │   ├── viewmodel
-│   │   ├── worker
+│   │   ├── worker // workmanager 
 ```
 ## Description
 
