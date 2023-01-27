@@ -63,7 +63,7 @@ class SearchBooksFragment :
                     text?.let {
                         val query = it.toString().trim()
                         searchBooksViewModel.searchBooksPaging(query)
-                        searchBooksViewModel.query = query
+                        searchBooksViewModel.setQuery(query)
                     }
                 }
                 .launchIn(this)
@@ -108,7 +108,7 @@ class SearchBooksFragment :
         var startTime = System.currentTimeMillis()
         var endTime: Long
 
-        etSearch.text = Editable.Factory.getInstance().newEditable(searchBooksViewModel.query)
+        etSearch.text = Editable.Factory.getInstance().newEditable(searchBooksViewModel.query.value)
 
         // 이런 식으로 구현 가능 하다.
         etSearch.addTextChangedListener { text: Editable? ->
@@ -119,7 +119,7 @@ class SearchBooksFragment :
                     if (query.isNotEmpty()) {
                         // bookSearchViewModel.searchBooks(query)
                         searchBooksViewModel.searchBooksPaging(query)
-                        searchBooksViewModel.query = query
+                        searchBooksViewModel.setQuery(query)
                     }
                 }
             }

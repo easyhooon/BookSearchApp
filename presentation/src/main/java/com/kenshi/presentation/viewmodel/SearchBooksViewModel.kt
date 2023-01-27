@@ -23,6 +23,8 @@ class SearchBooksViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
+    val query = savedStateHandle.getStateFlow(KEY_QUERY, "")
+
     private val _searchPagingResult = MutableStateFlow<PagingData<BookItem>>(PagingData.empty())
     val searchPagingResult: StateFlow<PagingData<BookItem>> = _searchPagingResult.asStateFlow()
 
@@ -36,6 +38,8 @@ class SearchBooksViewModel @Inject constructor(
                         bookEntity.toItem()
                     }
                 }
+                // 여기까지 변환된 데이터의 타입은 Flow<PagingData<BookItem>>
+                // 내가 받으려는 타입은 PagingData<BookItem>
                 .cachedIn(viewModelScope)
                 .collect {
                     _searchPagingResult.value = it
@@ -43,14 +47,8 @@ class SearchBooksViewModel @Inject constructor(
         }
     }
 
-    var query = String()
-        set(value) {
-            field = value
-            savedStateHandle[SAVE_STATE_KEY] = value
-        }
-
-    init {
-        query = savedStateHandle.get<String>(SAVE_STATE_KEY) ?: ""
+    fun setQuery(query: String) {
+        savedStateHandle[KEY_QUERY] = query
     }
 
     private suspend fun getSortMode() = withContext(viewModelScope.coroutineContext) {
@@ -58,6 +56,6 @@ class SearchBooksViewModel @Inject constructor(
     }
 
     companion object {
-        private const val SAVE_STATE_KEY = "query"
+        private const val KEY_QUERY = "query"
     }
 }
