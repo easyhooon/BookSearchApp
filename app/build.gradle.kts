@@ -2,19 +2,16 @@ plugins {
     id(Plugins.ANDROID_APPLICATION)
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KAPT)
-    id(Plugins.SECRETS_GRADLE_PLUGIN)
-    id(Plugins.SAFEARGS)
-    id(Plugins.PARCELIZE)
     id(Plugins.HILT_PLUGIN)
 }
 
 android {
-    compileSdk = DefaultConfig.COMPILE_SDK_VERSION
 
     defaultConfig {
         applicationId = "com.kenshi.booksearchapp"
         minSdk = DefaultConfig.MIN_SDK_VERSION
         targetSdk = DefaultConfig.TARGET_SDK_VERSION
+        compileSdk = DefaultConfig.COMPILE_SDK_VERSION
         versionCode = DefaultConfig.VERSION_CODE
         versionName = DefaultConfig.VERSION_NAME
 
@@ -31,37 +28,33 @@ android {
                 "proguard-rules.pro"
             )
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    buildFeatures {
-        viewBinding = true
-    }
 
-    //kapt 가 알아서 에러타입을 판단할 수 있도록
-    kapt {
-        correctErrorTypes = true
-    }
-
-    testOptions {
-        unitTests {
-            isIncludeAndroidResources = true
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_11
+            targetCompatibility = JavaVersion.VERSION_11
         }
-        animationsDisabled = true
+        kotlinOptions {
+            jvmTarget = "11"
+        }
+
+        //kapt 가 알아서 에러타입을 판단할 수 있도록
+        kapt {
+            correctErrorTypes = true
+        }
+
+        testOptions {
+            unitTests {
+                isIncludeAndroidResources = true
+            }
+            animationsDisabled = true
+        }
     }
 }
 
 dependencies {
-
-    implementation(Dependencies.CORE_KTX)
-    implementation(Dependencies.APP_COMPAT)
-    implementation(Dependencies.MATERIAL)
-    implementation(Dependencies.CONSTRAINT_LAYOUT)
+    implementation(project(":presentation"))
+    implementation(project(":data"))
+    implementation(project(":domain"))
 
     // Testing for Local test
     testImplementation(Testing.JUNIT4)
@@ -88,66 +81,20 @@ dependencies {
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.44.2")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.44")
 
-    // Retrofit
-    implementation(Dependencies.RETROFIT)
-    implementation(Dependencies.RETROFIT_CONVERTER_MOSHI)
-
-    // Moshi
-    implementation(Dependencies.MOSHI)
-    kapt(Dependencies.MOSHI_KAPT)
-
-    // Okhttp
-    implementation(Dependencies.OKHTTP)
-    implementation(Dependencies.OKHTTP_LOGGING_INTERCEPTOR)
-
-    // Lifecycle
-    implementation(Dependencies.LIFECYCLE_VIEWMODEL_KTX)
-    implementation(Dependencies.LIFECYCLE_RUNTIME_KTX)
-    implementation(Dependencies.LIFECYCLE_SAVEDSTATE)
-
-    // Coroutine
-    implementation(Dependencies.COROUTINE_ANDROID)
-    implementation(Dependencies.COROUTINE_CORE)
-
-    // Coil
-    implementation(Dependencies.COIL)
-
-    // Recyclerview
-    implementation(Dependencies.RECYCLERVIEW)
-
-    // Navigation
-    implementation(Dependencies.NAVIGATION_UI_KTX)
-    implementation(Dependencies.NAVIGATION_FRAGMENT_KTX)
-
     // Room
     implementation(Dependencies.ROOM_KTX)
     implementation(Dependencies.ROOM_RUNTIME)
     kapt(Dependencies.ROOM_KAPT)
     implementation(Dependencies.ROOM_PAGING)
 
-    // Kotlin Serialization
-    implementation(Dependencies.KOTLIN_SERIALIZATION)
-
-    // DataStore
-    implementation(Dependencies.PREFERENCES_DATASTORE)
-
-    // Paging
-    implementation(Dependencies.PAGING)
-
-    // WorkManager
-    implementation(Dependencies.WORKMANGER)
-
     // Hilt
     implementation(Dependencies.DAGGER_HILT)
     kapt(Dependencies.DAGGER_HILT_KAPT)
 
-    // ViewModel delegate
-    implementation(Dependencies.ACTIVITY_KTX)
-    implementation(Dependencies.FRAGMENT_KTX)
+    // Paging
+    implementation(Dependencies.PAGING)
 
     // Hilt extension
     implementation(Dependencies.HILT_EXTENSION_WORK)
     kapt(Dependencies.HILT_EXTENSION_KAPT)
-
-    implementation(Dependencies.SPLASH_SCREEN)
 }

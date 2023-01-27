@@ -1,6 +1,6 @@
 object Versions {
     // Project
-    const val AGP = "7.3.1"
+    const val AGP = "7.4.0"
     const val KOTLIN = "1.6.10"
     const val SECRETS_GRADLE = "2.0.1"
 

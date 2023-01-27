@@ -14,3 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "BookSearchApp"
 include(":app")
+include(":data")
+include(":domain")
+include(":presentation")

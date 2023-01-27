@@ -2,7 +2,7 @@ package com.kenshi.booksearchapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.kenshi.booksearchapp.data.db.BookSearchDatabase
+import com.kenshi.data.local.db.BookSearchDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -4,6 +4,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
+import com.kenshi.presentation.screen.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,7 +27,7 @@ import org.junit.runner.RunWith
 //     }
 // }
 
-// 계측테스트 코드를 그대로 local test로 수행하여 더 빠르게 테스트를 진행할 수 있음!
+// 계측 테스트 코드를 그대로 local test로 수행하여 더 빠르게 테스트를 진행할 수 있음!
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
 

@@ -2,7 +2,7 @@ package com.kenshi.booksearchapp.data.repository
 
 import androidx.paging.PagingData
 import com.kenshi.booksearchapp.domain.BookSearchRepository
-import com.kenshi.booksearchapp.domain.entity.BookEntity
+import com.kenshi.domain.entity.BookEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
