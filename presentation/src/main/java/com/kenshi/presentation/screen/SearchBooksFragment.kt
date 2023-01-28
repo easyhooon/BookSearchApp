@@ -20,6 +20,7 @@ import com.kenshi.presentation.databinding.FragmentSearchBooksBinding
 import com.kenshi.presentation.utils.Constants.SEARCH_BOOKS_TIME_DELAY
 import com.kenshi.presentation.viewmodel.SearchBooksViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
@@ -27,6 +28,8 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 
+@FlowPreview
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class SearchBooksFragment :
     BaseFragment<FragmentSearchBooksBinding>(R.layout.fragment_search_books) {
@@ -46,7 +49,6 @@ class SearchBooksFragment :
         initObservers()
     }
 
-    @OptIn(FlowPreview::class)
     private fun initObservers() {
         // 하나의 flow 에서 수명 주기 인식 수집을 진행하기만 하면 되는 경우엔 Flow.flowWithLifecycle 메서드를 사용하면 됨
         repeatOnStarted {
@@ -62,14 +64,14 @@ class SearchBooksFragment :
 
                     text?.let {
                         val query = it.toString().trim()
-                        searchBooksViewModel.searchBooksPaging(query)
+                        // searchBooksViewModel.searchBooksPaging(query)
                         searchBooksViewModel.setQuery(query)
                     }
                 }
                 .launchIn(this)
         }
 
-        collectLatestLifecycleFlow(searchBooksViewModel.searchPagingResult) {
+        collectLatestLifecycleFlow(searchBooksViewModel.searchResult) {
             bookSearchAdapter.submitData(it)
         }
     }
@@ -118,7 +120,7 @@ class SearchBooksFragment :
                     val query = it.toString().trim()
                     if (query.isNotEmpty()) {
                         // bookSearchViewModel.searchBooks(query)
-                        searchBooksViewModel.searchBooksPaging(query)
+                        // searchBooksViewModel.searchBooksPaging(query)
                         searchBooksViewModel.setQuery(query)
                     }
                 }
