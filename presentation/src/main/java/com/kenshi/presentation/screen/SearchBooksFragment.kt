@@ -129,24 +129,6 @@ class SearchBooksFragment :
             }
             startTime = endTime
         }
-
-//            val editTextFlow = binding.etSearch.textChangesToFlow()
-//
-//            editTextFlow
-//                .debounce(SEARCH_BOOKS_TIME_DELAY)
-//                .filter {
-//                    it?.length!! > 0
-//                }
-//                .onEach { text ->
-//                    Log.d("editTextFlow", "$text")
-//
-//                    text?.let {
-//                        val query = it.toString().trim()
-//                        searchBooksViewModel.searchBooksPaging(query)
-//                        searchBooksViewModel.query = query
-//                    }
-//                }
-//                .launchIn(this)
     }
 
     private fun setupLoadState() = with(binding) {
