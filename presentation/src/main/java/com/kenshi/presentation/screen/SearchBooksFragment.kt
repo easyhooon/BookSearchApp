@@ -73,7 +73,7 @@ class SearchBooksFragment :
                 .launchIn(this)
         }
 
-        collectLatestLifecycleFlow(searchBooksViewModel.searchResult) {
+        collectLatestLifecycleFlow(searchBooksViewModel.searchBooks) {
             bookSearchAdapter.submitData(it)
         }
     }

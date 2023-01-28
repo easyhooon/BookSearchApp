@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combineTransform
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
@@ -40,8 +41,12 @@ class SearchBooksViewModel @Inject constructor(
                 ""
             )
 
-    val searchResult: Flow<PagingData<BookItem>> =
-        query.combineTransform(searchSortMode) { query, sortMode -> emit(query to sortMode) }
+    val searchBooks: Flow<PagingData<BookItem>> =
+        query
+            .filter {
+                it.isNotEmpty()
+            }
+            .combineTransform(searchSortMode) { query, sortMode -> emit(query to sortMode) }
             .flatMapLatest { (query, sortMode) ->
                 searchBooksUseCase(query, sortMode)
                     .map { pagingData ->
