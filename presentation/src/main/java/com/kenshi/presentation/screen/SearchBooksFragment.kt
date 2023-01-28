@@ -15,6 +15,8 @@ import com.kenshi.presentation.utils.collectLatestLifecycleFlow
 import com.kenshi.presentation.utils.repeatOnStarted
 import com.kenshi.presentation.utils.textChangesToFlow
 import com.kenshi.presentation.R
+import com.kenshi.presentation.adapter.BookSearchLoadStateAdapter
+import com.kenshi.presentation.adapter.BookSearchPagingAdapter
 import com.kenshi.presentation.base.BaseFragment
 import com.kenshi.presentation.databinding.FragmentSearchBooksBinding
 import com.kenshi.presentation.utils.Constants.SEARCH_BOOKS_TIME_DELAY
@@ -38,7 +40,7 @@ class SearchBooksFragment :
 
     override fun getViewBinding() = FragmentSearchBooksBinding.inflate(layoutInflater)
 
-    private lateinit var bookSearchAdapter: com.kenshi.presentation.adapter.BookSearchPagingAdapter
+    private lateinit var bookSearchAdapter: BookSearchPagingAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,7 +52,7 @@ class SearchBooksFragment :
     }
 
     private fun initObservers() {
-        // 하나의 flow 에서 수명 주기 인식 수집을 진행하기만 하면 되는 경우엔 Flow.flowWithLifecycle 메서드를 사용하면 됨
+        // 하나의 flow 에서 수명 주기 인식 수집을 진행 하기만 하면 되는 경우엔 Flow.flowWithLifecycle 메서드를 사용하면 됨
         repeatOnStarted {
             val editTextFlow = binding.etSearch.textChangesToFlow()
 
@@ -77,7 +79,7 @@ class SearchBooksFragment :
     }
 
     private fun setupRecyclerView() {
-        bookSearchAdapter = com.kenshi.presentation.adapter.BookSearchPagingAdapter()
+        bookSearchAdapter = BookSearchPagingAdapter()
         binding.rvSearchResult.apply {
             setHasFixedSize(true)
             layoutManager =
@@ -92,7 +94,7 @@ class SearchBooksFragment :
             // pagingDataAdapter 와 loadStateAdapter 연결
             // recyclerView 의 footer 로 error 상황과 retry button 이 나타남
             adapter = bookSearchAdapter.withLoadStateFooter(
-                footer = com.kenshi.presentation.adapter.BookSearchLoadStateAdapter(
+                footer = BookSearchLoadStateAdapter(
                     bookSearchAdapter::retry
                 )
             )
