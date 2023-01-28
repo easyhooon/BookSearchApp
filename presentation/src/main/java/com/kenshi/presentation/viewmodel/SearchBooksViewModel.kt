@@ -34,7 +34,7 @@ class SearchBooksViewModel @Inject constructor(
     val query = savedStateHandle.getStateFlow<String?>(KEY_QUERY, null)
 
     private val searchSortMode: StateFlow<String> =
-        getSortModeUseCase.invoke().map { it }
+        getSortModeUseCase().map { it }
             .stateIn(
                 viewModelScope,
                 SharingStarted.WhileSubscribed(5000),
