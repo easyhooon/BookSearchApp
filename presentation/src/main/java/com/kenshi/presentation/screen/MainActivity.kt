@@ -28,7 +28,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         setupNavigation()
     }
 
-
     private fun setupNavigation() {
         val host =
             supportFragmentManager.findFragmentById(R.id.bookssearch_nav_host_fragment) as NavHostFragment

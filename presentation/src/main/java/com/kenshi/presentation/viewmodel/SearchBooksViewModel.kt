@@ -11,7 +11,14 @@ import com.kenshi.presentation.item.BookItem
 import com.kenshi.presentation.mapper.toItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combineTransform
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -25,9 +32,13 @@ class SearchBooksViewModel @Inject constructor(
 
     val query = savedStateHandle.getStateFlow(KEY_QUERY, "")
 
-    private val searchSortMode: StateFlow<String> = getSortModeUseCase.invoke().map {
-        it
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), "")
+    private val searchSortMode: StateFlow<String> =
+        getSortModeUseCase.invoke().map { it }
+            .stateIn(
+                viewModelScope,
+                SharingStarted.WhileSubscribed(5000),
+                ""
+            )
 
     val searchResult: Flow<PagingData<BookItem>> =
         query.combineTransform(searchSortMode) { query, sortMode -> emit(query to sortMode) }
