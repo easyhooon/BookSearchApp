@@ -151,7 +151,7 @@ class SearchBooksFragment :
 
     private fun setupLoadState() = with(binding) {
         // combinedLoadStates -> PagingSource 와 RemoteMediator 두가지 source 의 loading 상태를 가지고 있음
-        // remoteMediator 는 사용 하지 않기 때문에 source 의 값만 대응하면 됨
+        // remoteMediator 는 사용 하지 않기 때문에 source 의 값만 대응 하면 됨
         // prepend : loading 시작시 만들어짐
         // append : loading 종료시 만들어짐
         // refresh : loading 값을 갱신할 때 만들어짐
@@ -166,22 +166,6 @@ class SearchBooksFragment :
             rvSearchResult.isVisible = !isListEmpty
 
             progressBar.isVisible = loadState.refresh is LoadState.Loading
-
-            // loading State 는 LoadStateAdapter 에서 관리 해주기 때문에 주석 처리
-//            btnRetry.isVisible = loadState.refresh is LoadState.Error
-//                    || loadState.append is LoadState.Error
-//                    || loadState.prepend is LoadState.Error
-//
-//            val errorState: LoadState.Error? = loadState.append as? LoadState.Error
-//                ?: loadState.prepend as? LoadState.Error
-//                ?: loadState.refresh as? LoadState.Error
-//            errorState?.let {
-//                Toast.makeText(requireContext(), "it.error.message", Toast.LENGTH_SHORT).show()
-//            }
-//
-//            btnRetry.setOnClickListener {
-//                bookSearchAdapter.retry()
-//            }
         }
     }
 }
