@@ -52,6 +52,11 @@ class SearchBooksViewModel @Inject constructor(
                         }
                     }
             }
+            .stateIn(
+                viewModelScope,
+                SharingStarted.WhileSubscribed(5000),
+                PagingData.empty()
+            )
 
 //    private val _searchPagingResult = MutableStateFlow<PagingData<BookItem>>(PagingData.empty())
 //    val searchPagingResult: StateFlow<PagingData<BookItem>> = _searchPagingResult.asStateFlow()
