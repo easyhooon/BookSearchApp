@@ -60,7 +60,7 @@ presentation
 ## Description
 
 ## TODO 
-- [ ] ktlint, detekt 적용 
+- [x] ktlint, detekt 적용 
 - [ ] remoteMediator 적용 
 - [ ] TestCode 보완 및 작성
 
