@@ -59,6 +59,11 @@ presentation
 ```
 ## Description
 
+## TODO 
+- [ ] ktlint, detekt 적용 
+- [ ] remoteMediator 적용 
+- [ ] TestCode 보완 및 작성
+
 # MAD Score
 
 ![summary](https://user-images.githubusercontent.com/51016231/178445295-a6979959-65ba-4dae-847d-503cd963b897.png)
