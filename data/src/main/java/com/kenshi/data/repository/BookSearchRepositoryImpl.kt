@@ -2,15 +2,14 @@ package com.kenshi.data.repository
 
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.kenshi.booksearchapp.domain.BookSearchRepository
 import com.kenshi.data.local.BookSearchLocalDataSource
 import com.kenshi.data.mapper.toEntity
 import com.kenshi.data.remote.BookSearchRemoteDataSource
 import com.kenshi.domain.entity.BookEntity
+import com.kenshi.domain.repository.BookSearchRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
-
 
 class BookSearchRepositoryImpl @Inject constructor(
     private val bookSearchRemoteDataSource: BookSearchRemoteDataSource,

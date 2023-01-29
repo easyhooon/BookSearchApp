@@ -5,25 +5,30 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
-import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.swipeLeft
+import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.isRoot
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.filters.LargeTest
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
 import com.kenshi.presentation.R
 import com.kenshi.presentation.adapter.BookSearchViewHolder
-import org.hamcrest.Matcher
-import org.junit.Rule
-import org.junit.Test
 import com.kenshi.presentation.screen.MainActivity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import org.hamcrest.Matcher
+import org.junit.Rule
+import org.junit.Test
 
 // test runner 지정
-//@RunWith(AndroidJUnit4::class)
+// @RunWith(AndroidJUnit4::class)
 @HiltAndroidTest
 class MainActivityTest {
 
@@ -53,12 +58,12 @@ class MainActivityTest {
     @Test
     @SmallTest
     fun test_Activity_State() {
-        //val activityState = activityScenario.state.name
+        // val activityState = activityScenario.state.name
         val activityState = activityScenarioRule.scenario.state.name
         assertThat(activityState).isEqualTo("RESUMED")
     }
 
-    //UI Test는 시간이 많이 걸리는 작업이므로 Large
+    // UI Test는 시간이 많이 걸리는 작업이므로 Large
     @Test
     @LargeTest
     fun from_SearchFragment_to_Favorite_Ui_Operation() {
@@ -109,8 +114,6 @@ class MainActivityTest {
             override fun perform(uiController: UiController, view: View?) {
                 uiController.loopMainThreadForAtLeast(delay)
             }
-
         }
     }
-
 }

@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-// TODO 함수의 파라미터가 없을 경우엔 생성자를 val 로 지정해주지 않아도 됨
+// TODO 생성자 주입시 주입한 클래스의 파라미터가 없을 경우엔 생성자를 val 로 지정해주지 않아도 됨
 // 해당 내용 관련 학습
 @HiltViewModel
 class FavoriteBooksViewModel @Inject constructor(

@@ -1,7 +1,7 @@
 package com.kenshi.domain.usecase
 
-import com.kenshi.booksearchapp.domain.BookSearchRepository
 import com.kenshi.domain.entity.BookEntity
+import com.kenshi.domain.repository.BookSearchRepository
 import javax.inject.Inject
 
 class InsertBookUseCase @Inject constructor(

@@ -1,6 +1,6 @@
 package com.kenshi.domain.usecase
 
-import com.kenshi.booksearchapp.domain.BookSearchRepository
+import com.kenshi.domain.repository.BookSearchRepository
 import javax.inject.Inject
 
 class SaveCacheDeleteModeUseCase @Inject constructor(

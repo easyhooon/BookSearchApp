@@ -11,15 +11,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kenshi.presentation.utils.collectLatestLifecycleFlow
-import com.kenshi.presentation.utils.repeatOnStarted
-import com.kenshi.presentation.utils.textChangesToFlow
 import com.kenshi.presentation.R
 import com.kenshi.presentation.adapter.BookSearchLoadStateAdapter
 import com.kenshi.presentation.adapter.BookSearchPagingAdapter
 import com.kenshi.presentation.base.BaseFragment
 import com.kenshi.presentation.databinding.FragmentSearchBooksBinding
 import com.kenshi.presentation.utils.Constants.SEARCH_BOOKS_TIME_DELAY
+import com.kenshi.presentation.utils.collectLatestLifecycleFlow
+import com.kenshi.presentation.utils.repeatOnStarted
+import com.kenshi.presentation.utils.textChangesToFlow
 import com.kenshi.presentation.viewmodel.SearchBooksViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,7 +28,6 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -140,9 +139,9 @@ class SearchBooksFragment :
         bookSearchAdapter.addLoadStateListener { combinedLoadStates ->
             val loadState = combinedLoadStates.source
             // list가 비어 있는지 판정 하는 방법
-            val isListEmpty = bookSearchAdapter.itemCount < 1
-                    && loadState.refresh is LoadState.NotLoading
-                    && loadState.append.endOfPaginationReached
+            val isListEmpty = bookSearchAdapter.itemCount < 1 &&
+                loadState.refresh is LoadState.NotLoading &&
+                loadState.append.endOfPaginationReached
 
             tvEmptylist.isVisible = isListEmpty
             rvSearchResult.isVisible = !isListEmpty

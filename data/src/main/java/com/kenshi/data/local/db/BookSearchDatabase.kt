@@ -12,10 +12,10 @@ import com.kenshi.data.model.Book
     exportSchema = false
 )
 
-//typeConverter 를 지정 하면 room 에서 알아서 type convert 작업을 처리 해줌
+// typeConverter 를 지정 하면 room 에서 알아서 type convert 작업을 처리 해줌
 @TypeConverters(OrmConverter::class)
 abstract class BookSearchDatabase : RoomDatabase() {
 
-    //dao 지정
+    // dao 지정
     abstract fun bookSearchDao(): BookSearchDao
 }

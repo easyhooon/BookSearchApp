@@ -28,8 +28,8 @@ class BookDetailViewModel @Inject constructor(
     // viewModel 기능을 체크 하는데 repository 반환 값 그 자체에는 상관이 없기 때문에
     // repository fake double 을 사용
     val favoriteBooks: Flow<List<BookItem>> = getFavoriteBooksForTestUseCase().map { list ->
-            list.map {bookEntity ->
-                bookEntity.toItem()
-            }
+        list.map { bookEntity ->
+            bookEntity.toItem()
+        }
     }
 }

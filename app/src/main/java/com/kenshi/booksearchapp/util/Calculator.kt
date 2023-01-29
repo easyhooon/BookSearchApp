@@ -17,10 +17,10 @@ class Calculator {
     }
 
     fun division(x: Int, y: Int): Int? {
-        try {
-            return x / y
+        return try {
+            x / y
         } catch (e: Exception) {
-            return null
+            null
         }
     }
 }

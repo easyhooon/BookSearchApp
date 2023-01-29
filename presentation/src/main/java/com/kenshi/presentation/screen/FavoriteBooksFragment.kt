@@ -9,13 +9,12 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.kenshi.presentation.utils.collectLatestLifecycleFlow
 import com.kenshi.presentation.R
 import com.kenshi.presentation.base.BaseFragment
 import com.kenshi.presentation.databinding.FragmentFavoriteBooksBinding
+import com.kenshi.presentation.utils.collectLatestLifecycleFlow
 import com.kenshi.presentation.viewmodel.FavoriteBooksViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class FavoriteBooksFragment :

@@ -29,9 +29,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun setupNavigation() {
-        val host =
+        val navHost =
             supportFragmentManager.findFragmentById(R.id.bookssearch_nav_host_fragment) as NavHostFragment
-        navController = host.navController
+        navController = navHost.navController
         binding.bottomNavigationView.setupWithNavController(navController)
 
         appBarConfiguration = AppBarConfiguration(

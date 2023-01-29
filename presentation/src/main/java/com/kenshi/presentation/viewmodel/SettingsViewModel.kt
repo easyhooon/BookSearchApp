@@ -3,7 +3,11 @@ package com.kenshi.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.work.*
+import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
 import com.kenshi.domain.usecase.GetCacheDeleteModeUseCase
 import com.kenshi.domain.usecase.GetSortModeUseCase
 import com.kenshi.domain.usecase.SaveCacheDeleteModeUseCase

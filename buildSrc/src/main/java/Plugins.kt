@@ -10,4 +10,5 @@ object Plugins {
     const val HILT_PLUGIN = "dagger.hilt.android.plugin"
     const val PARCELIZE = "kotlin-parcelize"
     const val KAPT = "kotlin-kapt"
+    const val KTLINT = "org.jlleitschuh.gradle.ktlint"
 }

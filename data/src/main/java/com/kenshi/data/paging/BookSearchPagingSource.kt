@@ -2,8 +2,8 @@ package com.kenshi.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.kenshi.data.remote.api.BookSearchApi
 import com.kenshi.data.model.Book
+import com.kenshi.data.remote.api.BookSearchApi
 import com.kenshi.data.utils.Constants.PAGING_SIZE
 import retrofit2.HttpException
 import java.io.IOException
@@ -59,4 +59,3 @@ class BookSearchPagingSource(
         const val STARTING_PAGE_INDEX = 1
     }
 }
-

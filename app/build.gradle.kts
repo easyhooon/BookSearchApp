@@ -37,7 +37,7 @@ android {
             jvmTarget = "11"
         }
 
-        //kapt 가 알아서 에러타입을 판단할 수 있도록
+        // kapt 가 알아서 에러타입을 판단할 수 있도록
         kapt {
             correctErrorTypes = true
         }
@@ -52,6 +52,7 @@ android {
 }
 
 dependencies {
+
     implementation(project(":presentation"))
     implementation(project(":data"))
     implementation(project(":domain"))
@@ -98,3 +99,4 @@ dependencies {
     implementation(Dependencies.HILT_EXTENSION_WORK)
     kapt(Dependencies.HILT_EXTENSION_KAPT)
 }
+

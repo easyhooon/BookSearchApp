@@ -38,7 +38,7 @@ class MainActivityTest {
     @Test
     @SmallTest
     fun test_activity_state() {
-        //val activityState = activityScenario.state.name
+        // val activityState = activityScenario.state.name
         val activityState = activityScenarioRule.scenario.state.name
         assertThat(activityState).isEqualTo("RESUMED")
     }

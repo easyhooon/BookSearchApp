@@ -24,6 +24,5 @@ class BookSearchViewHolder(
                 tvDatetime.text = date
             }
         }
-
     }
 }

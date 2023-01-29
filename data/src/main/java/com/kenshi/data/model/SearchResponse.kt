@@ -1,6 +1,5 @@
 package com.kenshi.data.model
 
-
 import androidx.annotation.Keep
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

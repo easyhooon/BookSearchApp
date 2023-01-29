@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-//Json 만으로는 kotlin 에서 변환 실패함 field 추가
+// Json 만으로는 kotlin 에서 변환 실패함 field 추가
 @Keep
 @JsonClass(generateAdapter = true)
 data class Meta(

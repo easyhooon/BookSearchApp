@@ -7,8 +7,15 @@ plugins {
     id(Plugins.SAFEARGS) version Versions.NAVIGATION apply false
     id(Plugins.KOTLIN_SERIALIZATION) version Versions.KOTLIN apply false
     id(Plugins.DAGGER_HILT) version Versions.HILT apply false
+    id(Plugins.KTLINT) version Versions.KTLINT apply false
 }
 
 tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)
+}
+
+allprojects {
+    apply {
+        plugin(Plugins.KTLINT)
+    }
 }

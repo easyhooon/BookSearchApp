@@ -11,7 +11,7 @@ import org.junit.Test
 class CalculatorTest {
     // 인스턴스 생성
     // 테스트 시에는 각각의 독립된 Calculator 객체를 사용 해야 함
-    lateinit var calculator: Calculator
+    private lateinit var calculator: Calculator
 
     // 테스트 실행 직전에 수행 해야할 작업을 해줄 수 있음
     // 각각의 테스트에서 사용할 객체를 생성
@@ -23,7 +23,6 @@ class CalculatorTest {
     // 테스트 직후 해야 하는 작업, db를 닫거나, 객체를 삭제
     @After
     fun tearDown() {
-
     }
 
     // 메소드 이름을 문장 처럼 정의
@@ -33,10 +32,10 @@ class CalculatorTest {
         val x = 4
         val y = 2
 
-        //When
+        // When
         val result = calculator.addition(x, y)
 
-        //Then
+        // Then
         assertThat(result).isEqualTo(6)
     }
 
@@ -47,10 +46,10 @@ class CalculatorTest {
         val x = 4
         val y = 2
 
-        //When
+        // When
         val result = calculator.subtraction(x, y)
 
-        //Then
+        // Then
         assertThat(result).isEqualTo(2)
     }
 

@@ -1,4 +1,4 @@
-package com.kenshi.booksearchapp.domain
+package com.kenshi.domain.repository
 
 import androidx.paging.PagingData
 import com.kenshi.domain.entity.BookEntity

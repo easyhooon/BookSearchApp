@@ -19,7 +19,7 @@ class CacheDeleteWorker @AssistedInject constructor(
     private val cacheDeleteResult: String,
 ) : Worker(context, workerParams) {
 
-    //doWork 내부에 백그라운드 작업을 명시
+    // doWork 내부에 백그라운드 작업을 명시
     override fun doWork(): Result {
         return try {
             // 백그라운드 작업부

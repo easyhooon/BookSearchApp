@@ -1,6 +1,5 @@
 package com.kenshi.domain.entity
 
-
 data class BookEntity(
     val title: String,
     val contents: String,

@@ -7,8 +7,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
 import androidx.work.WorkManager
-import com.kenshi.data.remote.api.BookSearchApi
 import com.kenshi.data.local.db.BookSearchDatabase
+import com.kenshi.data.remote.api.BookSearchApi
 import com.kenshi.data.utils.Constants.BASE_URL
 import com.kenshi.data.utils.Constants.DATASTORE_NAME
 import dagger.Module
@@ -78,9 +78,8 @@ object NetworkModule {
     @Singleton
     @Provides
     fun providerWorkManager(@ApplicationContext context: Context): WorkManager =
-        //getInstance 로 싱글톤 객체를 만들어줌
+        // getInstance 로 싱글톤 객체를 만들어줌
         WorkManager.getInstance(context)
-
 
     // 캐시 최적화 결과를 반환하는 Sting 을 Worker 클래스에 주입
     @Singleton

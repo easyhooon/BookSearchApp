@@ -35,18 +35,17 @@ class BookDetailViewModelTest {
 
     @After
     fun tearDown() {
-
     }
-    
+
     @Test
     @ExperimentalCoroutinesApi
     fun save_book_test() = runTest {
         val book = BookItem(
-            "a", "b", "c","d", "e", listOf("f"),
-            "g",listOf("h"),0,0, "i", "j"
+            "a", "b", "c", "d", "e", listOf("f"),
+            "g", listOf("h"), 0, 0, "i", "j"
         )
         viewModel.saveBooks(book)
-        
+
         val favoriteBooks = viewModel.favoriteBooks.first()
         assertThat(favoriteBooks).contains(book)
     }
