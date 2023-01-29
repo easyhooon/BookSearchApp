@@ -11,4 +11,5 @@ object Plugins {
     const val PARCELIZE = "kotlin-parcelize"
     const val KAPT = "kotlin-kapt"
     const val KTLINT = "org.jlleitschuh.gradle.ktlint"
+    const val DETEKT = "io.gitlab.arturbosch.detekt"
 }

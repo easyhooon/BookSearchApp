@@ -34,8 +34,7 @@ class BookDetailViewModelTest {
     }
 
     @After
-    fun tearDown() {
-    }
+    fun tearDown() {}
 
     @Test
     @ExperimentalCoroutinesApi

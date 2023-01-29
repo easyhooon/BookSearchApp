@@ -35,4 +35,5 @@ object Versions {
     const val HILT_EXTENSION = "1.0.0"
     const val SPLASH_SCREEN ="1.0.0"
     const val KTLINT = "11.1.0"
+    const val DETEKT = "1.22.0"
 }

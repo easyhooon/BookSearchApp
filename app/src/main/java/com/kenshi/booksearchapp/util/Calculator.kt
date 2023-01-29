@@ -1,7 +1,5 @@
 package com.kenshi.booksearchapp.util
 
-import java.lang.Exception
-
 class Calculator {
 
     fun addition(x: Int, y: Int): Int {
@@ -19,7 +17,7 @@ class Calculator {
     fun division(x: Int, y: Int): Int? {
         return try {
             x / y
-        } catch (e: Exception) {
+        } catch (e: NumberFormatException) {
             null
         }
     }

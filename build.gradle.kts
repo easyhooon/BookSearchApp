@@ -8,6 +8,7 @@ plugins {
     id(Plugins.KOTLIN_SERIALIZATION) version Versions.KOTLIN apply false
     id(Plugins.DAGGER_HILT) version Versions.HILT apply false
     id(Plugins.KTLINT) version Versions.KTLINT apply false
+    id(Plugins.DETEKT) version Versions.DETEKT apply false
 }
 
 tasks.register<Delete>("clean") {
@@ -17,5 +18,6 @@ tasks.register<Delete>("clean") {
 allprojects {
     apply {
         plugin(Plugins.KTLINT)
+        plugin(Plugins.DETEKT)
     }
 }

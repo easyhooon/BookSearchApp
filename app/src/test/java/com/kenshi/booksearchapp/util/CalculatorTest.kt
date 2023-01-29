@@ -22,8 +22,7 @@ class CalculatorTest {
 
     // 테스트 직후 해야 하는 작업, db를 닫거나, 객체를 삭제
     @After
-    fun tearDown() {
-    }
+    fun tearDown() {}
 
     // 메소드 이름을 문장 처럼 정의
     @Test

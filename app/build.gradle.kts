@@ -8,7 +8,7 @@ plugins {
 android {
 
     defaultConfig {
-        applicationId = "com.kenshi.booksearchapp"
+        applicationId = DefaultConfig.APPLICATION_ID
         minSdk = DefaultConfig.MIN_SDK_VERSION
         targetSdk = DefaultConfig.TARGET_SDK_VERSION
         compileSdk = DefaultConfig.COMPILE_SDK_VERSION
@@ -28,26 +28,26 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
 
-        compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
-        }
-        kotlinOptions {
-            jvmTarget = "11"
-        }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
+    }
 
-        // kapt 가 알아서 에러타입을 판단할 수 있도록
-        kapt {
-            correctErrorTypes = true
-        }
+    // kapt 가 알아서 에러타입을 판단할 수 있도록
+    kapt {
+        correctErrorTypes = true
+    }
 
-        testOptions {
-            unitTests {
-                isIncludeAndroidResources = true
-            }
-            animationsDisabled = true
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
         }
+        animationsDisabled = true
     }
 }
 
