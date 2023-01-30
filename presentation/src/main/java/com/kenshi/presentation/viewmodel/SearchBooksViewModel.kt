@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import androidx.paging.map
 import com.kenshi.domain.usecase.GetSortModeUseCase
 import com.kenshi.domain.usecase.SearchBooksUseCase
@@ -52,6 +53,7 @@ class SearchBooksViewModel @Inject constructor(
                         }
                     }
             }
+            .cachedIn(viewModelScope)
             .stateIn(
                 viewModelScope,
                 SharingStarted.WhileSubscribed(5000),
