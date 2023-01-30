@@ -12,11 +12,6 @@ android {
 
     defaultConfig {
         buildConfigField("String", "BASE_URL", "\"https://dapi.kakao.com\"")
-        buildConfigField(
-            "String",
-            "BOOK_SEARCH_API_KEY",
-            properties["BOOK_SEARCH_API_KEY"] as String
-        )
     }
 }
 
