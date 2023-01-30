@@ -19,11 +19,9 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-// TODO 생성자 주입시 주입한 클래스의 파라미터가 없을 경우엔 생성자를 val 로 지정해주지 않아도 됨
-// 해당 내용 관련 학습
 @HiltViewModel
 class FavoriteBooksViewModel @Inject constructor(
-    private val getFavoriteBooksUseCase: GetFavoriteBooksUseCase,
+    getFavoriteBooksUseCase: GetFavoriteBooksUseCase,
     private val insertBookUseCase: InsertBookUseCase,
     private val deleteBookUseCase: DeleteBookUseCase
 ) : ViewModel() {
@@ -35,7 +33,7 @@ class FavoriteBooksViewModel @Inject constructor(
                     bookEntity.toItem()
                 }
             }
-            // 코루틴이 데이터 스트림을 캐시하고 공유 가능하게 만들어줌
+            // 코루틴스코프가 데이터 스트림을 캐시하고 공유 가능하게 만들어줌
             .cachedIn(viewModelScope)
             // stateFlow 로 변환
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), PagingData.empty())
