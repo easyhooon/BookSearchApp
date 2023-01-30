@@ -35,13 +35,14 @@ class SearchBooksViewModel @Inject constructor(
     val query = savedStateHandle.getStateFlow<String?>(KEY_QUERY, null)
 
     private val searchSortMode: StateFlow<String> =
-        getSortModeUseCase().map { it }
+        getSortModeUseCase()
             .stateIn(
                 viewModelScope,
                 SharingStarted.WhileSubscribed(5000),
                 ""
             )
 
+    // TODO: 흐름 완벽히 이해
     val searchBooks: Flow<PagingData<BookItem>> =
         query.filterNotNull()
             .combineTransform(searchSortMode) { query, sortMode -> emit(query to sortMode) }
@@ -60,11 +61,13 @@ class SearchBooksViewModel @Inject constructor(
                 PagingData.empty()
             )
 
-//    private val _searchPagingResult = MutableStateFlow<PagingData<BookItem>>(PagingData.empty())
-//    val searchPagingResult: StateFlow<PagingData<BookItem>> = _searchPagingResult.asStateFlow()
+    fun setQuery(query: String) {
+        savedStateHandle[KEY_QUERY] = query
+    }
 
-    // 함수의 파라미터가 존재 하므로 변수의 형태로 변환 할 수 없음
-    // 변수에 전달을 안하는데 어떻게 실행되고 있는거지
+//    private val _searchPagingResult = MutableStateFlow<PagingData<BookEntity>>(PagingData.empty())
+//    val searchPagingResult: StateFlow<PagingData<BookEntity>> = _searchPagingResult.asStateFlow()
+//
 //    fun searchBooksPaging(query: String) {
 //        viewModelScope.launch {
 //            searchBooksUseCase(query, getSortMode())
@@ -73,18 +76,12 @@ class SearchBooksViewModel @Inject constructor(
 //                        bookEntity.toItem()
 //                    }
 //                }
-//                // 여기까지 변환된 데이터의 타입은 Flow<PagingData<BookItem>>
-//                // 내가 받으려는 타입은 PagingData<BookItem>
 //                .cachedIn(viewModelScope)
 //                .collect {
 //                    _searchPagingResult.value = it
 //                }
 //        }
 //    }
-
-    fun setQuery(query: String) {
-        savedStateHandle[KEY_QUERY] = query
-    }
 
     private suspend fun getSortMode() = withContext(viewModelScope.coroutineContext) {
         getSortModeUseCase().first()
