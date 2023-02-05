@@ -1,4 +1,4 @@
-package com.kenshi.presentation.viewmodel
+package com.kenshi.presentation.screen.bookdetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BookDetailViewModel @Inject constructor(
     private val insertBookUseCase: InsertBookUseCase,
-    private val getFavoriteBooksForTestUseCase: GetFavoriteBooksForTestUseCase
+    getFavoriteBooksForTestUseCase: GetFavoriteBooksForTestUseCase
 ) : ViewModel() {
 
     fun saveBooks(bookItem: BookItem) = viewModelScope.launch {

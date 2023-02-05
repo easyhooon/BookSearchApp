@@ -6,7 +6,7 @@ import com.kenshi.booksearchapp.data.repository.FakeBookSearchRepository
 import com.kenshi.domain.usecase.GetFavoriteBooksForTestUseCase
 import com.kenshi.domain.usecase.InsertBookUseCase
 import com.kenshi.presentation.item.BookItem
-import com.kenshi.presentation.viewmodel.BookDetailViewModel
+import com.kenshi.presentation.screen.bookdetail.BookDetailViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest

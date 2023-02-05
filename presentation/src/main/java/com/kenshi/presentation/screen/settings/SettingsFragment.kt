@@ -1,4 +1,4 @@
-package com.kenshi.presentation.screen
+package com.kenshi.presentation.screen.settings
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,6 @@ import com.kenshi.presentation.R
 import com.kenshi.presentation.base.BaseFragment
 import com.kenshi.presentation.databinding.FragmentSettingsBinding
 import com.kenshi.presentation.utils.Sort
-import com.kenshi.presentation.viewmodel.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

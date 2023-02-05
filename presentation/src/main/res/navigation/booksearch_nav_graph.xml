@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_favorite_books"
-        android:name="com.kenshi.presentation.screen.FavoriteBooksFragment"
+        android:name="com.kenshi.presentation.screen.favoritebooks.FavoriteBooksFragment"
         android:label="@string/favorite"
         tools:layout="@layout/fragment_favorite_books">
         <action
@@ -21,13 +21,13 @@
 
     <fragment
         android:id="@+id/fragment_settings"
-        android:name="com.kenshi.presentation.screen.SettingsFragment"
+        android:name="com.kenshi.presentation.screen.settings.SettingsFragment"
         android:label="@string/settings"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/fragment_search_books"
-        android:name="com.kenshi.presentation.screen.SearchBooksFragment"
+        android:name="com.kenshi.presentation.screen.searchbooks.SearchBooksFragment"
         android:label="@string/search"
         tools:layout="@layout/fragment_search_books">
         <action
@@ -41,7 +41,7 @@
 
     <fragment
         android:id="@+id/fragment_book_detail"
-        android:name="com.kenshi.presentation.screen.BookDetailFragment"
+        android:name="com.kenshi.presentation.screen.bookdetail.BookDetailFragment"
         android:label="@string/book_info"
         tools:layout="@layout/fragment_book_detail">
         <argument

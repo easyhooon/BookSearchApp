@@ -1,4 +1,4 @@
-package com.kenshi.presentation.viewmodel
+package com.kenshi.presentation.screen.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
