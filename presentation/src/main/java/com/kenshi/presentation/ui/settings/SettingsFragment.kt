@@ -1,4 +1,4 @@
-package com.kenshi.presentation.screen.settings
+package com.kenshi.presentation.ui.settings
 
 import android.os.Bundle
 import android.util.Log

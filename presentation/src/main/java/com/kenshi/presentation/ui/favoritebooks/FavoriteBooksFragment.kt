@@ -1,4 +1,4 @@
-package com.kenshi.presentation.screen.favoritebooks
+package com.kenshi.presentation.ui.favoritebooks
 
 import android.os.Bundle
 import android.view.View
@@ -12,7 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.kenshi.presentation.R
 import com.kenshi.presentation.base.BaseFragment
 import com.kenshi.presentation.databinding.FragmentFavoriteBooksBinding
-import com.kenshi.presentation.screen.FavoriteBooksFragmentDirections
+import com.kenshi.presentation.ui.FavoriteBooksFragmentDirections
 import com.kenshi.presentation.utils.collectLatestLifecycleFlow
 import dagger.hilt.android.AndroidEntryPoint
 

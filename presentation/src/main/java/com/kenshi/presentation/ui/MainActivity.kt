@@ -1,4 +1,4 @@
-package com.kenshi.presentation.screen
+package com.kenshi.presentation.ui
 
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController

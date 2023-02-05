@@ -1,4 +1,4 @@
-package com.kenshi.presentation.screen.searchbooks
+package com.kenshi.presentation.ui.searchbooks
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

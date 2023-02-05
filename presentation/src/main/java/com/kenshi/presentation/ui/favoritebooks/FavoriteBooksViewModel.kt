@@ -1,4 +1,4 @@
-package com.kenshi.presentation.screen.favoritebooks
+package com.kenshi.presentation.ui.favoritebooks
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -1,4 +1,4 @@
-package com.kenshi.presentation.screen.searchbooks
+package com.kenshi.presentation.ui.searchbooks
 
 import android.os.Bundle
 import android.text.Editable
@@ -16,7 +16,7 @@ import com.kenshi.presentation.adapter.BookSearchLoadStateAdapter
 import com.kenshi.presentation.adapter.BookSearchPagingAdapter
 import com.kenshi.presentation.base.BaseFragment
 import com.kenshi.presentation.databinding.FragmentSearchBooksBinding
-import com.kenshi.presentation.screen.SearchBooksFragmentDirections
+import com.kenshi.presentation.ui.SearchBooksFragmentDirections
 import com.kenshi.presentation.utils.Constants.SEARCH_BOOKS_TIME_DELAY
 import com.kenshi.presentation.utils.collectLatestLifecycleFlow
 import com.kenshi.presentation.utils.repeatOnStarted

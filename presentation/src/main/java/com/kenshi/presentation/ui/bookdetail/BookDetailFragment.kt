@@ -1,4 +1,4 @@
-package com.kenshi.presentation.screen.bookdetail
+package com.kenshi.presentation.ui.bookdetail
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,7 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.kenshi.presentation.R
 import com.kenshi.presentation.base.BaseFragment
 import com.kenshi.presentation.databinding.FragmentBookDetailBinding
-import com.kenshi.presentation.screen.BookDetailFragmentArgs
+import com.kenshi.presentation.ui.BookDetailFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

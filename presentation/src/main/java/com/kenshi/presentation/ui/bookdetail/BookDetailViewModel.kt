@@ -1,4 +1,4 @@
-package com.kenshi.presentation.screen.bookdetail
+package com.kenshi.presentation.ui.bookdetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

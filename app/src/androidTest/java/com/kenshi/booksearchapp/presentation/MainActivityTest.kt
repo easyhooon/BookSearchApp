@@ -20,7 +20,7 @@ import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
 import com.kenshi.presentation.R
 import com.kenshi.presentation.adapter.BookSearchViewHolder
-import com.kenshi.presentation.screen.MainActivity
+import com.kenshi.presentation.ui.MainActivity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.hamcrest.Matcher
