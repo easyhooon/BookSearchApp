@@ -15,7 +15,6 @@ java {
 }
 
 dependencies {
-
     // Paging
     implementation(Dependencies.PAGING)
 

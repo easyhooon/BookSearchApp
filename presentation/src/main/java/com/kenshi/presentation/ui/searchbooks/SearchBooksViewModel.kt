@@ -12,16 +12,8 @@ import com.kenshi.presentation.item.BookItem
 import com.kenshi.presentation.mapper.toItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combineTransform
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -83,9 +75,13 @@ class SearchBooksViewModel @Inject constructor(
 //        }
 //    }
 
-    private suspend fun getSortMode() = withContext(viewModelScope.coroutineContext) {
+    private suspend fun getSortMode() = viewModelScope.async {
         getSortModeUseCase().first()
-    }
+    }.await()
+
+//    private suspend fun getSortMode() = withContext(viewModelScope.coroutineContext) {
+//        getSortModeUseCase().first()
+//    }
 
     companion object {
         private const val KEY_QUERY = "query"

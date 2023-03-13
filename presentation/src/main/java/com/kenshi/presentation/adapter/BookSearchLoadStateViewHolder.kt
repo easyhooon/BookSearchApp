@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kenshi.presentation.R
 import com.kenshi.presentation.databinding.ItemLoadStateBinding
 
-// loagingState 를 관리해주는 adapter 의 뷰홀더
+// loadingState 를 관리 해주는 adapter 의 뷰홀더
 class BookSearchLoadStateViewHolder(
     private val binding: ItemLoadStateBinding,
     retry: () -> Unit,

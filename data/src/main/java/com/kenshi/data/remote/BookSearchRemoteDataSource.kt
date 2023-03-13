@@ -13,7 +13,7 @@ import javax.inject.Inject
 class BookSearchRemoteDataSource @Inject constructor(
     private val bookSearchApi: BookSearchApi
 ) {
-    // TODO favoriteBooks 는 이 과정을 거치지 않아도 되는건가? 그게 room 과 paging 이 호환성이 잘 되어있다는 의미인 것인가
+    // TODO favoriteBooks 는 이 과정을 거치지 않아도 되는건가? 그게 room 과 paging 이 호환성이 잘 되어있다는 의미인 것인가 -> 그런듯
     fun searchBooks(query: String, sort: String): Flow<PagingData<Book>> {
         val pagingSourceFactory = { BookSearchPagingSource(bookSearchApi, query, sort) }
 
