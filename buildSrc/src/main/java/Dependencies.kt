@@ -46,9 +46,12 @@ object Dependencies {
     const val PREFERENCES_DATASTORE =
         "androidx.datastore:datastore-preferences:${Versions.DATASTORE}"
 
-    const val PAGING = "androidx.paging:paging-runtime-ktx:${Versions.PAGING}"
+    const val PAGING_RUNTIME = "androidx.paging:paging-runtime-ktx:${Versions.PAGING}"
+    const val PAGING_COMMON = "androidx.paging:paging-common-ktx:${Versions.PAGING}"
 
     const val WORKMANGER = "androidx.work:work-runtime-ktx:${Versions.WORK_MANAGER}"
+
+    const val JAVA_INJECT = "javax.inject:javax.inject:1"
 
     const val DAGGER_HILT = "com.google.dagger:hilt-android:${Versions.HILT}"
     const val DAGGER_HILT_KAPT = "com.google.dagger:hilt-compiler:${Versions.HILT}"

@@ -12,7 +12,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.kenshi.presentation.R
 import com.kenshi.presentation.base.BaseFragment
 import com.kenshi.presentation.databinding.FragmentFavoriteBooksBinding
-import com.kenshi.presentation.ui.FavoriteBooksFragmentDirections
 import com.kenshi.presentation.utils.collectLatestLifecycleFlow
 import dagger.hilt.android.AndroidEntryPoint
 

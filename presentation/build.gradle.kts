@@ -70,7 +70,7 @@ dependencies {
     implementation(Dependencies.NAVIGATION_FRAGMENT_KTX)
 
     // Paging
-    implementation(Dependencies.PAGING)
+    implementation(Dependencies.PAGING_RUNTIME)
 
     // ViewModel delegate
     implementation(Dependencies.ACTIVITY_KTX)

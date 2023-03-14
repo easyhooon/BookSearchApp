@@ -93,7 +93,7 @@ dependencies {
     kapt(Dependencies.DAGGER_HILT_KAPT)
 
     // Paging
-    implementation(Dependencies.PAGING)
+    implementation(Dependencies.PAGING_RUNTIME)
 
     // Hilt extension
     implementation(Dependencies.HILT_EXTENSION_WORK)

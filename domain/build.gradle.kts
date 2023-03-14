@@ -1,12 +1,6 @@
 plugins {
-    id(Plugins.ANDROID_LIBRARY)
-    id(Plugins.KOTLIN_ANDROID)
-    id(Plugins.KAPT)
-}
-
-android {
-    namespace = "com.kenshi.domain"
-    compileSdk = DefaultConfig.COMPILE_SDK_VERSION
+    id(Plugins.JAVA_LIBRARY)
+    id(Plugins.KOTLIN_JVM)
 }
 
 java {
@@ -16,9 +10,8 @@ java {
 
 dependencies {
     // Paging
-    implementation(Dependencies.PAGING)
+    implementation(Dependencies.PAGING_COMMON)
 
-    // Hilt
-    implementation(Dependencies.DAGGER_HILT)
-    kapt(Dependencies.DAGGER_HILT_KAPT)
+    // Dependency Injection
+    implementation(Dependencies.JAVA_INJECT)
 }
