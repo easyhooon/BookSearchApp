@@ -2,9 +2,9 @@ package com.kenshi.data.repository
 
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.kenshi.data.local.BookSearchLocalDataSource
+import com.kenshi.data.source.local.BookSearchLocalDataSource
 import com.kenshi.data.mapper.toEntity
-import com.kenshi.data.remote.BookSearchRemoteDataSource
+import com.kenshi.data.source.remote.BookSearchRemoteDataSource
 import com.kenshi.domain.entity.BookEntity
 import com.kenshi.domain.repository.BookSearchRepository
 import kotlinx.coroutines.flow.Flow

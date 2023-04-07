@@ -1,4 +1,4 @@
-package com.kenshi.data.local
+package com.kenshi.data.source.local
 
 import androidx.paging.PagingSource
 import androidx.room.Dao

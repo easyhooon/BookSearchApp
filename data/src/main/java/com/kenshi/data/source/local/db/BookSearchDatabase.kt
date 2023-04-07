@@ -1,9 +1,9 @@
-package com.kenshi.data.local.db
+package com.kenshi.data.source.local.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.kenshi.data.local.BookSearchDao
+import com.kenshi.data.source.local.BookSearchDao
 import com.kenshi.data.model.Book
 
 @Database(

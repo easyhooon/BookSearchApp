@@ -7,8 +7,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
 import androidx.work.WorkManager
-import com.kenshi.data.local.db.BookSearchDatabase
-import com.kenshi.data.remote.api.BookSearchApi
+import com.kenshi.data.source.local.db.BookSearchDatabase
+import com.kenshi.data.source.remote.api.BookSearchApi
 import com.kenshi.data.utils.Constants.BASE_URL
 import com.kenshi.data.utils.Constants.DATASTORE_NAME
 import dagger.Module

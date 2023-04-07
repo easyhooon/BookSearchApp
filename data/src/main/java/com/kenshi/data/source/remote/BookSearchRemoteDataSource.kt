@@ -1,11 +1,11 @@
-package com.kenshi.data.remote
+package com.kenshi.data.source.remote
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.kenshi.data.model.Book
 import com.kenshi.data.paging.BookSearchPagingSource
-import com.kenshi.data.remote.api.BookSearchApi
+import com.kenshi.data.source.remote.api.BookSearchApi
 import com.kenshi.data.utils.Constants
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

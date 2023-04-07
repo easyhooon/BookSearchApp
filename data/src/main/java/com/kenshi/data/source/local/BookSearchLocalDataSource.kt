@@ -1,4 +1,4 @@
-package com.kenshi.data.local
+package com.kenshi.data.source.local
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -9,9 +9,9 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.kenshi.data.local.BookSearchLocalDataSource.PreferenceKeys.CACHE_DELETE_MODE
-import com.kenshi.data.local.BookSearchLocalDataSource.PreferenceKeys.SORT_MODE
-import com.kenshi.data.local.db.BookSearchDatabase
+import com.kenshi.data.source.local.BookSearchLocalDataSource.PreferenceKeys.CACHE_DELETE_MODE
+import com.kenshi.data.source.local.BookSearchLocalDataSource.PreferenceKeys.SORT_MODE
+import com.kenshi.data.source.local.db.BookSearchDatabase
 import com.kenshi.data.mapper.toEntity
 import com.kenshi.data.mapper.toModel
 import com.kenshi.data.model.Book

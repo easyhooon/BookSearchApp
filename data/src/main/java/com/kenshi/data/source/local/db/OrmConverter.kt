@@ -1,4 +1,4 @@
-package com.kenshi.data.local.db
+package com.kenshi.data.source.local.db
 
 import androidx.room.TypeConverter
 import kotlinx.serialization.decodeFromString

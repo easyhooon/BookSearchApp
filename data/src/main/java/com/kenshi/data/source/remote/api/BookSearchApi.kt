@@ -1,4 +1,4 @@
-package com.kenshi.data.remote.api
+package com.kenshi.data.source.remote.api
 
 import com.kenshi.data.model.SearchResponse
 import com.kenshi.data.utils.Constants.API_KEY

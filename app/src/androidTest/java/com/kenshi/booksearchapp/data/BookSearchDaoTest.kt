@@ -2,8 +2,8 @@ package com.kenshi.booksearchapp.data
 
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
-import com.kenshi.data.local.BookSearchDao
-import com.kenshi.data.local.db.BookSearchDatabase
+import com.kenshi.data.source.local.BookSearchDao
+import com.kenshi.data.source.local.db.BookSearchDatabase
 import com.kenshi.data.model.Book
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
