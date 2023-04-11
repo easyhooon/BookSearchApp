@@ -61,7 +61,7 @@ dependencies {
     testImplementation(Testing.JUNIT4)
     testImplementation("androidx.test.ext:truth:1.5.0")
     testImplementation("androidx.test:runner:1.5.2")
-    testImplementation("org.robolectric:robolectric:4.8.1")
+    testImplementation("org.robolectric:robolectric:4.10")
     testImplementation("androidx.test.ext:junit-ktx:1.1.5")
     testImplementation("androidx.test:core:1.5.0")
     // Coroutine Test
