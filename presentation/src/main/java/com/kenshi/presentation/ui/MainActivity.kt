@@ -30,7 +30,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun setupNavigation() {
         val navHost =
-            supportFragmentManager.findFragmentById(R.id.bookssearch_nav_host_fragment) as NavHostFragment
+            supportFragmentManager.findFragmentById(R.id.book_search_nav_host_fragment) as NavHostFragment
         navController = navHost.navController
         binding.bottomNavigationView.setupWithNavController(navController)
 

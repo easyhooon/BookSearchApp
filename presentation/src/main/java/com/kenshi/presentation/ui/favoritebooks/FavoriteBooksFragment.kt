@@ -34,6 +34,7 @@ class FavoriteBooksFragment :
         // pagingData 는 시간에 따라 변하기 때문에 collect 가 아닌 collectLatest 로 구독 처리
         // 기존의 paging 값을 cancel -> 새 값을 구독 하도록
         collectLatestLifecycleFlow(favoriteBooksViewModel.favoriteBooks) {
+            // TODO bookSearchAdapter.loadStateFlow 에 대해 학습
             bookSearchAdapter.submitData(it)
         }
     }

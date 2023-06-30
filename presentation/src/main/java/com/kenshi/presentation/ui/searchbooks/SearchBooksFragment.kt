@@ -2,7 +2,6 @@ package com.kenshi.presentation.ui.searchbooks
 
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -25,8 +24,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -52,23 +50,22 @@ class SearchBooksFragment :
     private fun initObservers() {
         // 하나의 flow 에서 수명 주기 인식 수집을 진행 하기만 하면 되는 경우엔 Flow.flowWithLifecycle 메서드를 사용하면 됨
         repeatOnStarted {
-            val editTextFlow = binding.etSearch.textChangesToFlow()
+            launch {
+                val editTextFlow = binding.etSearch.textChangesToFlow()
 
-            editTextFlow
-                .debounce(SEARCH_BOOKS_TIME_DELAY)
-                .filter {
-                    it?.length!! > 0
-                }
-                .onEach { text ->
-                    Log.d("editTextFlow", "$text")
-
-                    text?.let {
-                        val query = it.toString().trim()
-                        // searchBooksViewModel.searchBooksPaging(query)
-                        searchBooksViewModel.setQuery(query)
+                editTextFlow
+                    .debounce(SEARCH_BOOKS_TIME_DELAY)
+                    .filter {
+                        it?.length!! > 0
                     }
-                }
-                .launchIn(this)
+                    .collect { text ->
+                        text?.let {
+                            val query = it.toString().trim()
+                            // searchBooksViewModel.searchBooksPaging(query)
+                            searchBooksViewModel.setQuery(query)
+                        }
+                    }
+            }
         }
 
         collectLatestLifecycleFlow(searchBooksViewModel.searchBooks) {
@@ -142,7 +139,7 @@ class SearchBooksFragment :
                 loadState.refresh is LoadState.NotLoading &&
                 loadState.append.endOfPaginationReached
 
-            tvEmptylist.isVisible = isListEmpty
+            tvEmptyList.isVisible = isListEmpty
             rvSearchResult.isVisible = !isListEmpty
 
             progressBar.isVisible = loadState.refresh is LoadState.Loading
